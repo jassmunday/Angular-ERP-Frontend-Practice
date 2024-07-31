@@ -1,0 +1,74 @@
+.company-list-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h4 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+}
+
+button {
+  padding: 8px 16px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+td {
+  color: #666;
+}
+
+button.edit-button,
+button.delete-button {
+  padding: 6px 12px;
+  font-size: 14px;
+  margin-right: 8px;
+}
+
+button.edit-button {
+  background-color: #28a745;
+}
+
+button.delete-button {
+  background-color: #dc3545;
+}
+
+button.edit-button:hover {
+  background-color: #218838;
+}
+
+button.delete-button:hover {
+  background-color: #c82333;
+}

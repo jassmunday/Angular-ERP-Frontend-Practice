@@ -1,0 +1,35 @@
+<div class="menu-form">
+    <h2>{{ isEditMode ? "Edit Menu" : "Add New Menu" }}</h2>
+  
+    <form [formGroup]="menuForm" (ngSubmit)="submit()">
+      <div class="grid-container">
+        <div class="grid-item-rate">
+          <label for="parent_name">Parent Name</label>
+          <input id="parent_name" formControlName="parent_name" />
+        </div>
+  
+        <div class="grid-item-rate">
+          <label for="menu_name">Menu Name</label>
+          <input id="menu_name" formControlName="menu_name" required />
+        </div>
+  
+        <div class="grid-item-rate">
+          <label for="controller_name">Controller Name</label>
+          <input id="controller_name" formControlName="controller_name" />
+        </div>
+  
+        <div class="grid-item-rate">
+          <label for="action_name">Action Name</label>
+          <input id="action_name" formControlName="action_name" />
+        </div>
+  
+        <div class="grid-item-rate">
+          <label for="link_address">Link Address</label>
+          <input id="link_address" formControlName="link_address" />
+        </div>
+      </div>
+      <button type="submit">{{ isEditMode ? "Update" : "Add" }}</button>
+      <button type="button" (click)="cancel()">Cancel</button>
+    </form>
+  </div>
+  

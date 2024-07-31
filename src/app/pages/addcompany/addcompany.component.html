@@ -1,0 +1,230 @@
+<form [formGroup]="combinedForm" (ngSubmit)="onSubmit()">
+  <div>
+    <div class="form-sections">
+      <div class="grid-container">
+        <h3>Company Details</h3>
+        <div class="grid-item">
+           <input type="text" formControlName="code" placeholder="Company Code"/>
+        </div>
+        <div class="grid-item">
+          <input type="text" formControlName="name" placeholder="Name"/>
+        </div>
+        <div class="grid-item">
+          <input type="text" formControlName="address" placeholder="Address"/>
+        </div>
+        <div class="grid-item">
+          <input type="text" formControlName="city" placeholder="City" />
+        </div>
+
+        <div class="grid-item" >
+          <input type="text" formControlName="state"  placeholder="State"/>
+        </div>
+        
+        <div class="grid-item">
+          <input type="tel" formControlName="phone" placeholder="Phone No" />
+        </div>
+        <div class="grid-item full-width">
+          <input type="email" formControlName="email"  placeholder="Email" />
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <h3>Managing Director Details</h3>
+        <div class="grid-item">
+         <input type="text" formControlName="md_name"  placeholder="Director Name"/>
+        </div>
+        <div class="grid-item">
+          <input type="text" formControlName="md_address" placeholder="Address" />
+        </div>
+        <div class="grid-item">
+          <input type="tel" formControlName="md_mobile" placeholder="Phone No"/>
+        </div>
+        <div class="grid-item">
+         <input type="text" formControlName="md_designation" placeholder="Designation" />
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <h3>Bank Details</h3>
+        <div class="grid-item">
+          <input type="text" formControlName="bank_name" placeholder="Bank Name" />
+        </div>
+        <div class="grid-item">
+          <input type="text" formControlName="account" placeholder="Account No" />
+        </div>
+        <div class="grid-item">
+          <input type="text" formControlName="ifsc_code" placeholder="IFSC Code"/>
+        </div>
+        <div class="grid-item">
+          <input type="text" formControlName="branch_name" placeholder="Branch Name" />
+        </div>
+        <div class="grid-item">
+          <input type="text" formControlName="branch_address" placeholder="Branch Address"/>
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <h3>Provident Fund Details</h3>
+          <label for="pf_applicable"> PF Applicable</label>
+          <input id="pf_applicable" type="checkbox" formControlName="pf_applicable"  />
+        <div class="grid-item">
+            <input
+              type="text"
+              formControlName="pf_number"
+              [disabled]="!combinedForm.get('pf_applicable')?.value"
+              placeholder="Provident Fund Number"
+              />
+        </div>
+        <div class="grid-item">
+          <input
+              type="text"
+              formControlName="pf_user_id"
+              [disabled]="!combinedForm.get('pf_applicable')?.value"
+              placeholder="User ID"          
+              />
+        </div>
+        <div class="grid-item">
+          <input
+              type="password"
+              formControlName="pf_password"
+              [disabled]="!combinedForm.get('pf_applicable')?.value"
+              placeholder="Password"
+          />
+        </div>
+        <div class="grid-item-rate">
+          <label for="pf_rate">PF Rate </label>
+          <input
+              type="number"
+              step="0.01"
+              id="pf_rate"
+              formControlName="pf_rate"
+              [disabled]="!combinedForm.get('pf_applicable')?.value"
+              placeholder="PF Rate"         
+              />
+        </div>
+        <div class="grid-item full-width">
+          <input
+              type="url"
+              formControlName="pf_website"
+              [disabled]="!combinedForm.get('pf_applicable')?.value"
+              placeholder="PF Website"
+          />
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <h3>Employee Security Information Details</h3>
+       
+          <label for="esi_applicable">ESI Applicable</label>
+          <input id="esi_applicable" type="checkbox" formControlName="esi_applicable" /> 
+
+        <div class="grid-item">
+          <input
+              type="text"
+              formControlName="esi_number"
+              [disabled]="!combinedForm.get('esi_applicable')?.value"
+              placeholder="ESI No"
+          />
+        </div>
+        <div class="grid-item">
+          <input
+              type="text"
+              formControlName="esi_user_id"
+              [disabled]="!combinedForm.get('esi_applicable')?.value"
+              placeholder="User Id"
+          />
+        </div>
+        <div class="grid-item">
+          <input
+              type="password"
+              formControlName="esi_password"
+              [disabled]="!combinedForm.get('esi_applicable')?.value"
+              placeholder="ESI Password"
+          />
+        </div>
+        <div class="grid-item-rate">
+          <label for="esi_rate">ESI Rate</label>
+          <input
+              type="number"
+              step="0.01"
+              formControlName="esi_rate"
+              [disabled]="!combinedForm.get('esi_applicable')?.value"
+              placeholder="Employee Rate"
+          />
+        </div>
+        <div class="grid-item full-width">
+          <input
+              type="url"
+              formControlName="esi_website"
+              [disabled]="!combinedForm.get('esi_applicable')?.value"
+              placeholder="ESI Website"
+          />
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <h3>Labour Welfare Fund Details</h3>
+        
+          <label for="lwf_applicable"> LWF Applicable</label>
+          <input id="lwf_applicable" type="checkbox" formControlName="lwf_applicable" />
+
+        <div class="grid-item">
+          <input
+              type="text"
+              formControlName="lwf_number"
+              [disabled]="!combinedForm.get('lwf_applicable')?.value"
+              placeholder="LWF Number"
+          />
+        </div>
+        <div class="grid-item">
+          <input
+              type="text"
+              formControlName="lwf_user_id"
+              [disabled]="!combinedForm.get('lwf_applicable')?.value"
+              placeholder="User Id"
+          />
+        </div>
+        <div class="grid-item">
+          <input
+              type="password"
+              formControlName="lwf_password"
+              [disabled]="!combinedForm.get('lwf_applicable')?.value"
+              placeholder="Password"
+          />
+        </div>
+        <div class="grid-item-rate">
+          <label for="lwf_employee_rate">Employee Rate</label>
+          <input
+              type="number"
+              step="0.01"
+              id="lwf_employee_rate"
+              formControlName="lwf_employee_rate"
+              [disabled]="!combinedForm.get('lwf_applicable')?.value"
+              placeholder="Employee Rate"
+          />
+        </div>
+        <div class="grid-item-rate">
+          <label for="lwf_employer_rate">Employer Rate</label>
+          <input
+              type="number"
+              step="0.01"
+              formControlName="lwf_employer_rate"
+              [disabled]="!combinedForm.get('lwf_applicable')?.value"
+              placeholder="Employer Rate"
+          />
+        </div>
+        <div class="grid-item full-width">
+          <input
+              type="url"
+              formControlName="lwf_website"
+              [disabled]="!combinedForm.get('lwf_applicable')?.value"
+              placeholder="LWF Website"
+          />
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="combinedForm.invalid">Submit</button>
+    <button type="button" (click)="cancel()">Cancel</button>
+  </div>
+</form>

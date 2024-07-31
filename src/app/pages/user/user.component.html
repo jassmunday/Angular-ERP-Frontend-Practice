@@ -1,0 +1,73 @@
+<div class="user-management">
+  
+  <h2>User List</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Email</th>
+        <th>Mobile No</th>
+        <th>Company</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.full_name }}</td>
+        <td>{{ user.user_name }}</td>
+        <td>{{ user.role }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.mobile_no }}</td>
+        <td>{{ user.company }}</td>
+        <td>
+          <button (click)="editUser(user)" class="btn btn-edit">Edit</button>
+          <button (click)="deleteUser(user.user_name)" class="btn btn-delete">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <h3>{{ isEditMode ? 'Edit User' : 'Add User' }}</h3>
+    <div class="grid-container">
+      <div class="grid-item">
+        <input id="full_name" formControlName="full_name" type="text"  placeholder="Full Name"/>
+      </div>
+      <div class="grid-item">
+        <input id="user_name" formControlName="user_name" type="text" placeholder="User Name" [attr.disabled]="isEditMode ? true : null" />
+      </div>
+      <div class="grid-item">
+        <input id="password" formControlName="password" type="password" placeholder="Password"/>
+      </div>
+      <div class="grid-item">
+        <input id="role" formControlName="role" type="text" placeholder="Role"/>
+      </div>
+      <div class="grid-item">
+        <input id="email" formControlName="email" type="email" placeholder="Email"/>
+      </div>
+      <div class="grid-item">
+      
+        <input id="email_password" formControlName="email_password" type="password" placeholder="Email Password"/>
+      </div>
+      <div class="grid-item">
+       
+        <input id="mobile_no" formControlName="mobile_no" type="text" placeholder="Mobile No" />
+      </div>
+      <div class="grid-item">
+       
+        <input id="photo" formControlName="photo" type="text" placeholder="Photo URL"/>
+      </div>
+      <div class="grid-item-rate full-width">
+        <select id="company" formControlName="company">
+          <option value="" disabled>Select Company</option>
+          <option *ngFor="let company of companies" [value]="company">{{ company }}</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-save">{{ isEditMode ? 'Update' : 'Save' }}</button>
+    <button type="button" (click)="resetForm()" class="btn btn-reset">Reset</button>
+  </form>
+</div>

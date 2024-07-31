@@ -1,0 +1,110 @@
+/* Container for the entire form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Style for each section header */
+h3 {
+  margin-bottom: 10px;
+}
+
+/* Flex container to place grid containers side by side */
+.form-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Flex item for each grid container */
+.grid-container {
+  flex: 1;
+  min-width: 400px; 
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+/* Style for each grid item */
+.grid-item {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Align label and input field on separate lines */
+.grid-item label {
+  margin-bottom: 5px; /* Space between label and input */
+}
+
+.grid-item-rate {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.grid-item-rate label {
+  width: 125px;
+}
+.grid-item-rate input {
+  padding: 8px;
+  width: 450px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: aliceblue; /* Background color */
+}
+
+.grid-item-rate section {
+  padding: 8px;
+  width: 450px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: aliceblue; /* Background color */
+}
+
+.grid-item input {
+  width: 100%; /* Input field takes 100% of the grid container width */
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: aliceblue; /* Background color */
+}
+
+.check-box-item {
+  display: flex;
+  align-items: center; /* Aligns checkbox and label inline */
+  gap: 10px; /* Space between checkbox and label */
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Style for buttons */
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #b0bec5;
+}
+
+button + button {
+  background-color: darkblue;
+}

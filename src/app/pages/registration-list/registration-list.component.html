@@ -1,0 +1,32 @@
+<div class="registration-list-container">
+  
+  <h2>Registration List</h2>
+
+  <button class="btn btn-primary" (click)="addNewRegistration()">Add New</button>
+
+  <table class="registration-table">
+    <thead>
+      <tr>
+        <th>Unique ID</th>
+        <th>Name</th>
+        <th>DOB</th>
+        <th>Joining Date</th>
+        <th>Gender</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let registration of registrations">
+        <td>{{ registration.unique_id }}</td>
+        <td>{{ registration.user_name }}</td>
+        <td>{{ registration.dob }}</td>
+        <td>{{ registration.joining_date }}</td>
+        <td>{{ registration.gender }}</td>
+        <td>
+          <button (click)="editRegistration(registration.unique_id)">Edit</button>
+          <button (click)="deleteRegistration(registration.unique_id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

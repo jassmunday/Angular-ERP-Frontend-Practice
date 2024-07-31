@@ -1,0 +1,83 @@
+.sidebar {
+  padding-top: 60px;
+  width: 250px;
+  background-color: rgb(255, 255, 255);
+  color: grey;
+  font-weight: bold;
+  min-height: 100vh;
+  max-height: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 10px 0;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  color: grey;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ensure the text and arrow are spaced apart */
+}
+
+.dropdown-toggle:hover {
+  color: blue;
+}
+
+.dropdown-arrow {
+  transition: transform 0.3s ease;
+}
+
+.dropdown-arrow.open {
+  transform: rotate(180deg); /* Rotate the arrow when the dropdown is open */
+}
+
+.dropdown-menu {
+  display: none;
+  flex-direction: column;
+  position: relative; /* Use relative positioning */
+  margin-top: 10px; /* Add margin to create space below the toggle */
+  margin-left: 20px; /* Adjust margin to align with the toggle */
+  width: calc(100% - 40px); /* Adjust width to fit within the sidebar */
+  transition: all 0.3s ease;
+}
+
+.dropdown-menu a {
+  color: grey;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+}
+
+.dropdown-menu a.active {
+  color: darkblue;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f0f0f0;
+  color: darkblue;
+}
+
+.dropdown-menu.show {
+  display: flex; /* Use display flex when 'show' class is added */
+}

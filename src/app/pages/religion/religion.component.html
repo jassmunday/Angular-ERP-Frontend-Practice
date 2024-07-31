@@ -1,0 +1,38 @@
+<div class="categories-container">
+    <h2>Manage religions</h2>
+    
+    <form [formGroup]="religionForm" (ngSubmit)="addReligion()">
+      <div class="form-inline">
+        <div class="form-group">
+          <label for="religion">religion:</label>
+          <input id="religion" formControlName="religionValue" placeholder="Enter new religion" />
+          <div *ngIf="religionForm.get('religionValue')?.invalid && religionForm.get('religionValue')?.touched">
+            religion is required.
+          </div>
+        </div>
+  
+        <button type="submit" [disabled]="religionForm.invalid">Add religion</button>
+      </div>
+    </form>
+  
+    <h3>Existing religions</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>religion</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let religion of religions">
+          <td>{{ religion }}</td>
+          <td>
+            <button (click)="deleteReligion(religion)" class="delete-button">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  
+

@@ -1,0 +1,30 @@
+/* not-found.component.css */
+.not-found-container {
+    text-align: center;
+    padding: 50px;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  .not-found-container h1 {
+    font-size: 100px;
+    margin: 0;
+    color: #ff6f6f;
+  }
+  
+  .not-found-container p {
+    font-size: 18px;
+    margin: 20px 0;
+  }
+  
+  .home-link {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .home-link:hover {
+    text-decoration: underline;
+  }
+  

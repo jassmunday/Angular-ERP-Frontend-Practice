@@ -1,0 +1,478 @@
+<form [formGroup]="registrationForm" (ngSubmit)="submit()">
+  <!-- User Information Section -->
+  <div class="form-sections">
+    <div class="grid-container">
+      <h3>User Information</h3>
+
+      <div class="grid-item">
+        <input
+          id="unique_id"
+          formControlName="unique_id"
+          type="number"
+          placeholder="Unique ID"
+          [readOnly]="isEditMode"
+        />
+        <h5
+          *ngIf="
+            registrationForm.get('unique_id')?.touched &&
+            registrationForm.get('unique_id')?.invalid
+          "
+        >
+          Unique ID is required
+        </h5>
+      </div>
+
+      <div class="grid-item">
+        <input
+          id="user_name"
+          formControlName="user_name"
+          type="text"
+          placeholder="User Name"
+        />
+        <h5
+          *ngIf="
+            registrationForm.get('user_name')?.touched &&
+            registrationForm.get('user_name')?.invalid
+          "
+        >
+          User Name is required
+        </h5>
+      </div>
+
+      <div class="grid-item-rate">
+        <label for="dob">Date Of Birth</label>
+        <input id="dob" formControlName="dob" type="date" />
+        <h5
+          *ngIf="
+            registrationForm.get('dob')?.touched &&
+            registrationForm.get('dob')?.invalid
+          "
+        >
+          Date of Birth is required
+        </h5>
+      </div>
+
+      <div class="grid-item-rate">
+        <label for="joining_date">Joining Date</label>
+        <input id="joining_date" formControlName="joining_date" type="date" />
+        <h5
+          *ngIf="
+            registrationForm.get('joining_date')?.touched &&
+            registrationForm.get('joining_date')?.invalid
+          "
+        >
+          Joining Date is required
+        </h5>
+      </div>
+
+      <div class="grid-item-radio">
+        <label>Gender</label>
+        <div class="content-radio">
+          <div>
+            <label for="Male">Male</label>
+            <input
+              id="Male"
+              type="radio"
+              formControlName="gender"
+              value="Male"
+            />
+          </div>
+          <div>
+            <label for="Female">Female</label>
+            <input
+              id="Female"
+              type="radio"
+              formControlName="gender"
+              value="Female"
+            />
+          </div>
+          <div>
+            <label for="other">Other</label>
+            <input
+              id="other"
+              type="radio"
+              formControlName="gender"
+              value="Other"
+            />
+          </div>
+        </div>
+        <h5
+          *ngIf="
+            registrationForm.get('gender')?.touched &&
+            registrationForm.get('gender')?.invalid
+          "
+        >
+          Gender is required
+        </h5>
+      </div>
+
+      <div class="grid-item">
+        <input
+          id="photo"
+          formControlName="photo"
+          type="text"
+          placeholder="Photo URL"
+        />
+      </div>
+
+      <div class="grid-item-rate">
+        <label for="leaving_date">Leaving Date</label>
+        <input id="leaving_date" formControlName="leaving_date" type="date" />
+      </div>
+    </div>
+
+    <!-- Personal Information Section -->
+
+    <div class="grid-container">
+      <h3>Personal Information</h3>
+
+      <div class="grid-item">
+        <input
+          id="father_husband_name"
+          formControlName="father_husband_name"
+          type="text"
+          placeholder="Father/Husband Name"
+        />
+        <h5
+          *ngIf="
+            registrationForm.get('father_husband_name')?.touched &&
+            registrationForm.get('father_husband_name')?.invalid
+          "
+        >
+          Father/Husband Name is required
+        </h5>
+      </div>
+
+      <div class="grid-item-rate">
+        <select
+          id="father_husband_relation"
+          formControlName="father_husband_relation"
+        >
+          <option value="" disabled>Select Relation</option>
+          <option value="Father">Father</option>
+          <option value="Husband">Husband</option>
+          <!-- Add other options if needed -->
+        </select>
+        <h5
+          *ngIf="
+            registrationForm.get('father_husband_relation')?.touched &&
+            registrationForm.get('father_husband_relation')?.invalid
+          "
+        >
+          Father/Husband Relation is required
+        </h5>
+      </div>
+
+      <div class="grid-item">
+        <input
+          id="mother_name"
+          formControlName="mother_name"
+          type="text"
+          placeholder="Mother Name"
+        />
+      </div>
+
+      <div class="grid-item">
+        <input
+          id="phone"
+          formControlName="phone"
+          type="text"
+          placeholder="Phone No"
+        />
+        <h5
+          *ngIf="
+            registrationForm.get('phone')?.touched &&
+            registrationForm.get('phone')?.invalid
+          "
+        >
+          Phone number is required and must be in a valid format
+        </h5>
+      </div>
+
+      <div class="grid-item">
+        <input
+          id="email_id"
+          formControlName="email_id"
+          type="email"
+          placeholder="Email Id"
+        />
+        <h5
+          *ngIf="
+            registrationForm.get('email_id')?.touched &&
+            registrationForm.get('email_id')?.invalid
+          "
+        >
+          A valid email is required
+        </h5>
+      </div>
+    </div>
+
+    <!-- Additional Information Section -->
+
+    <div class="grid-container">
+      <h3>Additional Information</h3>
+
+      <div class="grid-item">
+        <input
+          id="aadhar_no"
+          formControlName="aadhar_no"
+          type="text"
+          placeholder="Aadhar No"
+        />
+        <h5
+          *ngIf="
+            registrationForm.get('aadhar_no')?.touched &&
+            registrationForm.get('aadhar_no')?.invalid
+          "
+        >
+          Aadhar Number is required
+        </h5>
+      </div>
+
+      <div class="grid-item">
+        <input
+          id="pan_no"
+          formControlName="pan_no"
+          type="text"
+          placeholder="PAN No"
+        />
+        <h5
+          *ngIf="
+            registrationForm.get('pan_no')?.touched &&
+            registrationForm.get('pan_no')?.invalid
+          "
+        >
+          PAN Number is required
+        </h5>
+      </div>
+
+      <div class="grid-item">
+        <input id="uan" formControlName="uan" type="text" placeholder="UAN" />
+      </div>
+
+      <div class="grid-item">
+        <input
+          id="religion"
+          formControlName="religion"
+          type="text"
+          placeholder="Religion"
+        />
+      </div>
+
+      <div class="grid-item">
+        <input
+          id="relation"
+          formControlName="relation"
+          type="text"
+          placeholder="Relation"
+        />
+      </div>
+
+      <div class="grid-item">
+        <input
+          id="flats"
+          formControlName="flats"
+          type="number"
+          placeholder="Flats"
+        />
+      </div>
+    </div>
+
+    <!-- Bank Information Section -->
+
+    <div class="grid-container">
+      <h3>Bank Information</h3>
+
+      <div class="grid-item">
+        <input
+          id="bank_name"
+          formControlName="bank_name"
+          type="text"
+          placeholder="Bank Name"
+        />
+      </div>
+
+      <div class="grid-item">
+        <input
+          id="account_no"
+          formControlName="account_no"
+          type="text"
+          placeholder="Account No"
+        />
+      </div>
+
+      <div class="grid-item">
+        <input
+          id="ifsc_code"
+          formControlName="ifsc_code"
+          type="text"
+          placeholder="IFSC Code"
+        />
+      </div>
+
+      <div class="grid-item">
+        <input
+          id="bank_address"
+          formControlName="bank_address"
+          type="text"
+          placeholder="Bank Address"
+        />
+      </div>
+    </div>
+
+    <!-- Address Information Section -->
+
+    <div class="grid-container">
+      <h3>Address Information</h3>
+
+      <div class="grid-item">
+        <input
+          id="house_no"
+          formControlName="house_no"
+          type="text"
+          placeholder="House No"
+        />
+      </div>
+
+      <div class="grid-item">
+        <input
+          id="street_no"
+          formControlName="street_no"
+          type="text"
+          placeholder="Street No"
+        />
+      </div>
+
+      <div class="grid-item">
+        <input
+          id="area"
+          formControlName="area"
+          type="text"
+          placeholder="Area"
+        />
+      </div>
+
+      <div class="grid-item-rate">
+        <select id="city" formControlName="city" placeholder="Select City">
+          <option value="" disabled>List Of Cities</option>
+          <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+        </select>
+        <h5
+          *ngIf="
+            registrationForm.get('city')?.touched &&
+            registrationForm.get('city')?.invalid
+          "
+        >
+          City is required
+        </h5>
+      </div>
+
+      <div class="grid-item-rate">
+        <select id="state" formControlName="state">
+          <option value="" disabled>List Of States</option>
+          <option *ngFor="let state of states" [value]="state">
+            {{ state }}
+          </option>
+        </select>
+        <h5
+          *ngIf="
+            registrationForm.get('state')?.touched &&
+            registrationForm.get('state')?.invalid
+          "
+        >
+          State is required
+        </h5>
+      </div>
+
+      <div class="grid-item-rate">
+        <select id="country" formControlName="country">
+          <option value="" disabled>List Of countries</option>
+          <option *ngFor="let country of countries" [value]="country">
+            {{ country }}
+          </option>
+        </select>
+        <h5
+          *ngIf="
+            registrationForm.get('country')?.touched &&
+            registrationForm.get('country')?.invalid
+          "
+        >
+          Country is required
+        </h5>
+      </div>
+    </div>
+
+    <!-- Family Members Section -->
+
+    <div class="grid-container">
+      <h3>Family Members</h3>
+
+      <div formArrayName="familyMembers">
+        <div
+          *ngFor="let member of familyMembers.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <div class="grid-item">
+            <input
+              id="name"
+              formControlName="name"
+              type="text"
+              placeholder="Name"
+            />
+            <h5
+              *ngIf="member.get('name')?.touched && member.get('name')?.invalid"
+            >
+              Name is required
+            </h5>
+          </div>
+
+          <div class="grid-item-rate">
+            <select id="m_relation" formControlName="m_relation" placeholder="Select Relation">
+              <option value="" disabled>List Of Relations</option>
+              <option *ngFor="let relation of relations" [value]="relation">{{ relation }}</option>
+            </select>
+            <h5
+              *ngIf="
+                member.get('m_relation')?.touched &&
+                member.get('m_relation')?.invalid
+              "
+            >
+              Relation is required
+            </h5>
+          </div>
+
+          <div class="grid-item-rate">
+            <label for="m_dob">Date Of Birth</label>
+            <input
+              id="m_dob"
+              formControlName="m_dob"
+              type="date"
+              placeholder="DOB"
+            />
+            <h5
+              *ngIf="
+                member.get('m_dob')?.touched && member.get('m_dob')?.invalid
+              "
+            >
+              DOB is required
+            </h5>
+          </div>
+
+          <button type="button" (click)="removeFamilyMember(i)">
+            Remove Member
+          </button>
+        </div>
+        <button type="button" (click)="addFamilyMember()">
+          Add Family Member
+        </button>
+      </div>
+    </div>
+
+    <!-- Form Submit and Cancel Buttons -->
+
+    <div class="grid-container">
+      <button type="submit">Submit</button>
+      <button type="button" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</form>

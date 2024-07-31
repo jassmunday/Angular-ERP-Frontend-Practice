@@ -1,0 +1,221 @@
+<form [formGroup]="registrationForm" (ngSubmit)="submit()">
+  <!-- ID Field -->
+  <div class="form-group">
+    <label for="id">ID</label>
+    <input
+      id="id"
+      formControlName="id"
+      type="number"
+      class="form-control"
+    />
+    <div
+      *ngIf="
+        registrationForm.get('id')?.touched &&
+        registrationForm.get('id')?.invalid
+      "
+    >
+      <small class="text-danger">ID is required.</small>
+    </div>
+  </div>
+
+  <!-- User Details -->
+  <div class="form-group">
+    <label for="user_name">Name</label>
+    <input
+      id="user_name"
+      formControlName="user_name"
+      type="text"
+      class="form-control"
+    />
+    <div
+      *ngIf="
+        registrationForm.get('user_name')?.touched &&
+        registrationForm.get('user_name')?.invalid
+      "
+    >
+      <small class="text-danger">Name is required.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email_id">Email</label>
+    <input
+      id="email_id"
+      formControlName="email_id"
+      type="email"
+      class="form-control"
+    />
+    <div
+      *ngIf="
+        registrationForm.get('email_id')?.touched &&
+        registrationForm.get('email_id')?.invalid
+      "
+    >
+      <small class="text-danger">Valid email is required.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="joining_date">Joining Date</label>
+    <input
+      id="joining_date"
+      formControlName="joining_date"
+      type="date"
+      class="form-control"
+    />
+    <div
+      *ngIf="
+        registrationForm.get('joining_date')?.touched &&
+        registrationForm.get('joining_date')?.invalid
+      "
+    >
+      <small class="text-danger">Joining Date is required.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Gender</label>
+    <div>
+      <label>
+        <input
+          type="radio"
+          formControlName="gender"
+          value="male"
+        /> Male
+      </label>
+      <label>
+        <input
+          type="radio"
+          formControlName="gender"
+          value="female"
+        /> Female
+      </label>
+      <label>
+        <input
+          type="radio"
+          formControlName="gender"
+          value="other"
+        /> Other
+      </label>
+    </div>
+    <div
+      *ngIf="
+        registrationForm.get('gender')?.touched &&
+        registrationForm.get('gender')?.invalid
+      "
+    >
+      <small class="text-danger">Gender is required.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="phone">Phone</label>
+    <input
+      id="phone"
+      formControlName="phone"
+      type="tel"
+      class="form-control"
+    />
+    <div
+      *ngIf="
+        registrationForm.get('phone')?.touched &&
+        registrationForm.get('phone')?.invalid
+      "
+    >
+      <small class="text-danger">Phone number is required.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="father_husband_name">Father/Husband Name</label>
+    <input
+      id="father_husband_name"
+      formControlName="father_husband_name"
+      type="text"
+      class="form-control"
+    />
+    <div
+      *ngIf="
+        registrationForm.get('father_husband_name')?.touched &&
+        registrationForm.get('father_husband_name')?.invalid
+      "
+    >
+      <small class="text-danger">Father/Husband Name is required.</small>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="father_husband_relation">Father/Husband Relation</label>
+    <select
+      id="father_husband_relation"
+      formControlName="father_husband_relation"
+      class="form-control"
+    >
+      <option value="">Select Relation</option>
+      <option value="Father">Father</option>
+      <option value="Husband">Husband</option>
+    </select>
+    <div
+      *ngIf="
+        registrationForm.get('father_husband_relation')?.touched &&
+        registrationForm.get('father_husband_relation')?.invalid
+      "
+    >
+      <small class="text-danger">Father/Husband Relation is required.</small>
+    </div>
+  </div>
+
+  <!-- Family Members Section -->
+  <div formArrayName="familyMembers" class="form-group">
+    <label>Family Members</label>
+    <div
+      *ngFor="let member of familyMembers.controls; let i = index"
+      [formGroupName]="i"
+      class="family-member"
+    >
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" formControlName="name" type="text" class="form-control" />
+        <div *ngIf="member.get('name')?.touched && member.get('name')?.invalid">
+          <small class="text-danger">Name is required.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="m_relation">Relation</label>
+        <input
+          id="m_relation"
+          formControlName="m_relation"
+          type="text"
+          class="form-control"
+        />
+        <div
+          *ngIf="member.get('m_relation')?.touched && member.get('m_relation')?.invalid"
+        >
+          <small class="text-danger">Relation is required.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="m_dob">Date of Birth</label>
+        <input id="m_dob" formControlName="m_dob" type="date" class="form-control" />
+        <div *ngIf="member.get('m_dob')?.touched && member.get('m_dob')?.invalid">
+          <small class="text-danger">Date of Birth is required.</small>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-danger"
+        (click)="removeFamilyMember(i)"
+      >
+        Remove
+      </button>
+    </div>
+    <button type="button" class="btn btn-primary mt-2" (click)="addFamilyMember()">
+      Add Family Member
+    </button>
+  </div>
+
+  <!-- Form Action Buttons -->
+  <button type="submit" class="btn btn-success mt-3" [disabled]="registrationForm.invalid">
+    Submit
+  </button>
+</form>

@@ -1,0 +1,32 @@
+<div class="menu-list">
+    <h2>Menu List</h2>
+    <button (click)="addNewMenu()">Add New Menu</button>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Menu Name</th>
+          <th>Parent Name</th>
+          <th>Controller Name</th>
+          <th>Action Name</th>
+          <th>Link Address</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let menu of menus; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ menu.menu_name || '-' }}</td>
+          <td>{{ menu.parent_name || '-' }}</td>
+          <td>{{ menu.controller_name || '-' }}</td>
+          <td>{{ menu.action_name || '-' }}</td>
+          <td>{{ menu.link_address || '-' }}</td>
+          <td>
+            <button (click)="editMenu(menu.menu_name)">Edit</button>
+            <button (click)="deleteMenu(menu.menu_name)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

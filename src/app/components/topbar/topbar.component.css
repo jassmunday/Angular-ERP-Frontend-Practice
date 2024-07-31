@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+}
+.topbar {
+  background-color: #fff;
+  color: darkblue;
+  padding: 10px;
+  width: auto;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: left 0.3s ease-in-out;
+  position: static;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow at the bottom */
+}
+.inner{
+  display: flex;
+  gap: 20px;
+}
+.menu-button {
+  background: none;
+  border: none;
+  color: darkblue;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.menu-button:hover {
+  color: #aaa;
+}

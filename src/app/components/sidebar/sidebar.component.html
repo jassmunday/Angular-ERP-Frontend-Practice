@@ -1,0 +1,31 @@
+<nav class="sidebar">
+  <ul>
+    <li>
+      <div class="dropdown">
+        <button class="dropdown-toggle" (click)="toggleDropdown('masters')">
+          Masters
+          <span class="dropdown-arrow" [ngClass]="{'open': isDropdownOpen['masters']}">&#9660;</span>
+        </button>
+        <div class="dropdown-menu" [ngClass]="{'show': isDropdownOpen['masters']}">
+          <a routerLink="/masters/categories" routerLinkActive="active">Categories</a>
+          <a routerLink="/masters/companies" routerLinkActive="active">Companies</a>
+          <a routerLink="/masters/flats" routerLinkActive="active">Flats</a>
+          <a routerLink="/masters/relations" routerLinkActive="active">Relations</a>
+          <a routerLink="/registrations-list" routerLinkActive="active">Registrations</a>
+          <a routerLink="/masters/religions" routerLinkActive="active">Religions</a>
+          <a routerLink="/masters/users" routerLinkActive="active">Users</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropdown-toggle" (click)="toggleDropdown('security')">
+          Security
+          <span class="dropdown-arrow" [ngClass]="{'open': isDropdownOpen['security']}">&#9660;</span>
+        </button>
+        <div class="dropdown-menu" [ngClass]="{'show': isDropdownOpen['security']}">
+          <a routerLink="/security/menu-list" routerLinkActive="active">Menus</a>
+          <a routerLink="/security/roles" routerLinkActive="active">Role Permissions</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</nav>

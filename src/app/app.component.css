@@ -1,0 +1,73 @@
+/* Ensure the container takes the full viewport height */
+.container-all {
+  display: flex;
+  height: 100vh;
+  overflow: hidden; /* Prevent scrollbars on the container */
+}
+
+.container {
+  display: flex;
+  flex-direction: column; /* Arrange children vertically */
+  height: 100vh;
+}
+
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 1000; /* Ensure the header is above other content */
+}
+
+.app-sidenav {
+  position: fixed;
+  top: 60px; /* Align with the bottom of the header */
+  left: 0;
+  width: 250px; /* Fixed width for the sidebar */
+  height: calc(100vh - 60px); /* Full height minus header */
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto; /* Allow scrolling if sidebar content exceeds height */
+  transition: transform 0.3s ease; /* Smooth transition for sidebar */
+}
+
+.content {
+  margin-top: 60px; /* Align with the bottom of the header */
+  margin-left: 250px; /* Start with margin equal to sidebar width */
+  padding: 20px;
+  overflow-y: auto; /* Allow scrolling if content exceeds height */
+  height: calc(100vh - 60px); /* Full height minus header */
+  box-sizing: border-box;
+  transition: margin-left 0.3s ease; /* Smooth transition for content */
+  flex: 1;
+}
+
+.content.without-sidebar {
+  margin-left: 0; /* Remove margin when sidebar is hidden */
+}
+
+.with-sidebar {
+  transform: translateX(0); /* Ensure the sidebar is visible */
+}
+
+.without-sidebar {
+  transform: translateX(-250px); /* Move sidebar out of view */
+}
+
+/* Ensure the dropdown menu is positioned correctly */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: none;
+  flex-direction: column;
+}
+
+.dropdown-menu.show {
+  display: flex; /* Show the dropdown menu */
+}

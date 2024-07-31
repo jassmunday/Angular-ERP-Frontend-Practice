@@ -1,0 +1,39 @@
+<div class="categories-container container mt-5">
+  <h4 class="mb-4">Manage Categories</h4>
+
+  <form [formGroup]="categoryForm" (ngSubmit)="addCategory()" class="form-inline mb-3">
+      <div class="form-group mr-2">
+          <input type="text" 
+                 class="form-control" 
+                 placeholder="Category" 
+                 [formControl]="category">
+      </div>
+      <button type="submit" class="btn btn-primary mr-2">
+          {{editingCategory ? 'Save Changes' : 'Add New'}}
+      </button>
+      <button *ngIf="editingCategory" 
+              type="button" 
+              class="btn btn-secondary" 
+              (click)="cancelEdit()">
+          Cancel
+      </button>
+  </form>
+  
+  <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>Category Name</th>
+              <th>Actions</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let category of categories">
+              <td>{{ category }}</td>
+              <td>
+                  <button (click)="editCategory(category)" class="btn btn-sm btn-warning mr-2">Edit</button>
+                  <button (click)="deleteCategory(category)" class="btn btn-sm btn-danger">Delete</button>
+              </td> 
+          </tr>
+      </tbody>
+  </table>
+</div>
