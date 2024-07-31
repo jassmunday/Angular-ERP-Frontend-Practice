@@ -1,32 +1,55 @@
-<div class="menu-list">
-    <h2>Menu List</h2>
-    <button (click)="addNewMenu()">Add New Menu</button>
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Menu Name</th>
-          <th>Parent Name</th>
-          <th>Controller Name</th>
-          <th>Action Name</th>
-          <th>Link Address</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let menu of menus; let i = index">
-          <td>{{ i + 1 }}</td>
-          <td>{{ menu.menu_name || '-' }}</td>
-          <td>{{ menu.parent_name || '-' }}</td>
-          <td>{{ menu.controller_name || '-' }}</td>
-          <td>{{ menu.action_name || '-' }}</td>
-          <td>{{ menu.link_address || '-' }}</td>
-          <td>
-            <button (click)="editMenu(menu.menu_name)">Edit</button>
-            <button (click)="deleteMenu(menu.menu_name)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+<div class="registration-list-container">
+  <h2>Menu List</h2>
+  <button class="add-btn" (click)="addNewMenu()">Add New Menu</button>
+  <table mat-table [dataSource]="dataSource" class="registration-table">
+    <!-- Serial No Column -->
+    <ng-container matColumnDef="serialNo">
+      <th mat-header-cell *matHeaderCellDef>#</th>
+      <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+    </ng-container>
+
+    <!-- Menu Name Column -->
+    <ng-container matColumnDef="menuName">
+      <th mat-header-cell *matHeaderCellDef>Menu Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.menu_name || '-' }}</td>
+    </ng-container>
+
+    <!-- Parent Name Column -->
+    <ng-container matColumnDef="parentName">
+      <th mat-header-cell *matHeaderCellDef>Parent Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.parent_name || '-' }}</td>
+    </ng-container>
+
+    <!-- Controller Name Column -->
+    <ng-container matColumnDef="controllerName">
+      <th mat-header-cell *matHeaderCellDef>Controller Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.controller_name || '-' }}</td>
+    </ng-container>
+
+    <!-- Action Name Column -->
+    <ng-container matColumnDef="actionName">
+      <th mat-header-cell *matHeaderCellDef>Action Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.action_name || '-' }}</td>
+    </ng-container>
+
+    <!-- Link Address Column -->
+    <ng-container matColumnDef="linkAddress">
+      <th mat-header-cell *matHeaderCellDef>Link Address</th>
+      <td mat-cell *matCellDef="let element">{{ element.link_address || '-' }}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button (click)="editMenu(element.menu_name)">Edit</button>
+        <button mat-button color="warn" (click)="deleteMenu(element.menu_name)">Delete</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSize]="10" showFirstLastButtons></mat-paginator>
+</div>
