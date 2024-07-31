@@ -6,6 +6,10 @@ import { CategoriesComponent } from './pages/categories/categories.component';
 import { CompaniesComponent } from './pages/companies/companies.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +21,10 @@ import { ReactiveFormsModule } from '@angular/forms';
             CategoriesComponent, 
             CompaniesComponent,
             ReactiveFormsModule,
+            MatTableModule,
+            MatPaginatorModule,
+            MatButtonModule,
+            MatSortModule
           ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

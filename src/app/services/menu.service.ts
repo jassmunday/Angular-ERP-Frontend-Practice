@@ -21,7 +21,43 @@ export class MenuService {
       action_name: 'Companies List',
       link_address: 'masters/companies',
     },
+    {
+      parent_name: 'Masters',
+      menu_name: 'Registration',
+      controller_name: 'Registration',
+      action_name: 'Registration List',
+      link_address: 'masters/registration',
+    },
+    {
+      parent_name: 'Masters',
+      menu_name: 'Users',
+      controller_name: 'Users',
+      action_name: 'Users List',
+      link_address: 'masters/users',
+    },
+    {
+      parent_name: 'Masters',
+      menu_name: 'Relations',
+      controller_name: 'Relations',
+      action_name: 'Relations List',
+      link_address: 'masters/relations',
+    },
+    {
+      parent_name: 'Masters',
+      menu_name: 'Registers',
+      controller_name: 'Registers',
+      action_name: 'Registers List',
+      link_address: 'masters/registers',
+    },
+    {
+      parent_name: 'Masters',
+      menu_name: 'Categories',
+      controller_name: 'Categories',
+      action_name: 'Categories List',
+      link_address: 'masters/categories',
+    },
   ];
+  
 
   constructor() {}
 

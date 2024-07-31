@@ -1,26 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule } from '@angular/material/button';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { Component } from '@angular/core';
 import { MenuService } from '../../services/menu.service';
 import { Menu } from '../../../../models/types';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-menu-list',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatButtonModule, MatPaginatorModule],
+  imports: [CommonModule],
   templateUrl: './menu-list.component.html',
-  styleUrls: ['./menu-list.component.css']
+  styleUrl: './menu-list.component.css'
 })
-export class MenuListComponent implements OnInit {
-  displayedColumns: string[] = ['serialNo', 'menuName', 'parentName', 'controllerName', 'actionName', 'linkAddress', 'actions'];
-  dataSource = new MatTableDataSource<Menu>([]);
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+export class MenuListComponent {
+  menus: Menu[] = [];
 
   constructor(
     private menuService: MenuService,
@@ -32,16 +24,15 @@ export class MenuListComponent implements OnInit {
   }
 
   loadMenus() {
-    this.dataSource.data = this.menuService.getMenus();
-    this.dataSource.paginator = this.paginator;
+    this.menus = this.menuService.getMenus();
   }
 
-  editMenu(menuName: string) {
-    this.router.navigate(['/edit-menu', menuName]);
+  editMenu(menu_name: string) {
+    this.router.navigate(['/edit-menu', menu_name]);
   }
 
-  deleteMenu(menuName: string) {
-    this.menuService.deleteMenu(menuName);
+  deleteMenu(menu_name: string) {
+    this.menuService.deleteMenu(menu_name);
     this.loadMenus();
   }
 
