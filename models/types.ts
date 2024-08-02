@@ -112,3 +112,17 @@ export type Menu = {
   action_name:string,
   link_address:string
 }
+
+export type RolePermissions = {
+  controller_name:string,
+  controller_action:string,
+  add?:boolean,
+  read?:boolean
+  edit?:boolean,
+  delete?:boolean,
+}
+
+export type Role = {
+  role:string,
+  rolePermissions: RolePermissions []
+}

@@ -14,8 +14,9 @@ import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { Registration2Component } from './pages/registration2/registration2.component';
 import { Reglist2Component } from './pages/reglist2/reglist2.component';
 import { MenusComponent } from './pages/menus/menus.component';
-import { RolesComponent } from './pages/roles/roles.component';
+
 import { MenuListComponent } from './pages/menu-list/menu-list.component';
+import { RolePermissionsComponent } from './pages/role-permissions/role-permissions.component';
 
 export const routes: Routes = [
   { path: 'masters/companies', component: CompaniesComponent },
@@ -43,6 +44,6 @@ export const routes: Routes = [
   { path: 'security/menu-list', component: MenuListComponent },
   { path: 'add-menu', component: MenusComponent },
   { path: 'edit-menu/:menu_name', component: MenusComponent },
-  { path: 'security/roles', component: RolesComponent },
+  { path: 'security/roles', component: RolePermissionsComponent},
   { path: '**', redirectTo: '/not-found' }
 ];

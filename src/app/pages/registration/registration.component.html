@@ -1,10 +1,10 @@
 <form [formGroup]="registrationForm" (ngSubmit)="submit()">
-  <!-- User Information Section -->
   <div class="form-sections">
     <div class="grid-container">
       <h3>User Information</h3>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="unique_id">Unique ID</label>
         <input
           id="unique_id"
           formControlName="unique_id"
@@ -22,7 +22,8 @@
         </h5>
       </div>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="user_name">User Name</label>
         <input
           id="user_name"
           formControlName="user_name"
@@ -106,7 +107,8 @@
         </h5>
       </div>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="photo">Photo URL</label>
         <input
           id="photo"
           formControlName="photo"
@@ -126,7 +128,8 @@
     <div class="grid-container">
       <h3>Personal Information</h3>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="father_husband_name">Father/Husband Name</label>
         <input
           id="father_husband_name"
           formControlName="father_husband_name"
@@ -144,6 +147,7 @@
       </div>
 
       <div class="grid-item-rate">
+        <label for="father_husband_relation">Father/Husband Relation</label>
         <select
           id="father_husband_relation"
           formControlName="father_husband_relation"
@@ -163,7 +167,8 @@
         </h5>
       </div>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="mother_name">Mother Name</label>
         <input
           id="mother_name"
           formControlName="mother_name"
@@ -172,7 +177,8 @@
         />
       </div>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="phone">Phone No</label>
         <input
           id="phone"
           formControlName="phone"
@@ -189,7 +195,8 @@
         </h5>
       </div>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="email_id">Email Id</label>
         <input
           id="email_id"
           formControlName="email_id"
@@ -212,7 +219,8 @@
     <div class="grid-container">
       <h3>Additional Information</h3>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="aadhar_no">Aadhar No</label>
         <input
           id="aadhar_no"
           formControlName="aadhar_no"
@@ -229,7 +237,8 @@
         </h5>
       </div>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="pan_no">PAN No</label>
         <input
           id="pan_no"
           formControlName="pan_no"
@@ -246,11 +255,13 @@
         </h5>
       </div>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="uan">UAN</label>
         <input id="uan" formControlName="uan" type="text" placeholder="UAN" />
       </div>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="religion">Religion</label>
         <input
           id="religion"
           formControlName="religion"
@@ -259,7 +270,8 @@
         />
       </div>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="relation">Relation</label>
         <input
           id="relation"
           formControlName="relation"
@@ -268,7 +280,8 @@
         />
       </div>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="flats">Flats</label>
         <input
           id="flats"
           formControlName="flats"
@@ -283,7 +296,8 @@
     <div class="grid-container">
       <h3>Bank Information</h3>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="bank_name">Bank Name</label>
         <input
           id="bank_name"
           formControlName="bank_name"
@@ -292,7 +306,8 @@
         />
       </div>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="account_no">Account No</label>
         <input
           id="account_no"
           formControlName="account_no"
@@ -301,7 +316,8 @@
         />
       </div>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="ifsc_code">IFSC Code</label>
         <input
           id="ifsc_code"
           formControlName="ifsc_code"
@@ -310,7 +326,8 @@
         />
       </div>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="bank_address">Bank Address</label>
         <input
           id="bank_address"
           formControlName="bank_address"
@@ -325,7 +342,8 @@
     <div class="grid-container">
       <h3>Address Information</h3>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="House No">House No</label>
         <input
           id="house_no"
           formControlName="house_no"
@@ -334,7 +352,8 @@
         />
       </div>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="street_no">Street No</label>
         <input
           id="street_no"
           formControlName="street_no"
@@ -343,7 +362,8 @@
         />
       </div>
 
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="area">Area</label>
         <input
           id="area"
           formControlName="area"
@@ -353,6 +373,7 @@
       </div>
 
       <div class="grid-item-rate">
+        <label for="city">City</label>
         <select id="city" formControlName="city" placeholder="Select City">
           <option value="" disabled>List Of Cities</option>
           <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
@@ -368,6 +389,7 @@
       </div>
 
       <div class="grid-item-rate">
+        <label for="state">State</label>
         <select id="state" formControlName="state">
           <option value="" disabled>List Of States</option>
           <option *ngFor="let state of states" [value]="state">
@@ -385,6 +407,7 @@
       </div>
 
       <div class="grid-item-rate">
+        <label for="country">Country</label>
         <select id="country" formControlName="country">
           <option value="" disabled>List Of countries</option>
           <option *ngFor="let country of countries" [value]="country">
@@ -412,7 +435,8 @@
           *ngFor="let member of familyMembers.controls; let i = index"
           [formGroupName]="i"
         >
-          <div class="grid-item">
+          <div class="grid-item-rate">
+            <label for="name">Name</label>
             <input
               id="name"
               formControlName="name"
@@ -427,6 +451,7 @@
           </div>
 
           <div class="grid-item-rate">
+            <label for="m_relation">Relation</label>
             <select id="m_relation" formControlName="m_relation" placeholder="Select Relation">
               <option value="" disabled>List Of Relations</option>
               <option *ngFor="let relation of relations" [value]="relation">{{ relation }}</option>

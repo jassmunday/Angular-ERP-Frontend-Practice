@@ -23,6 +23,7 @@ type FamilyMemberFormGroup = FormGroup<{
   templateUrl: './registration2.component.html',
   styleUrls: ['./registration2.component.css'],
 })
+
 export class Registration2Component implements OnInit {
   registrationForm: FormGroup;
   registration: Registration2[];
@@ -31,7 +32,9 @@ export class Registration2Component implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private registrationService: Regsitration2Service
+
   ) {
+
     this.registration = this.registrationService.getRegistrations();
 
     this.registrationForm = new FormGroup({
@@ -72,7 +75,7 @@ export class Registration2Component implements OnInit {
   removeFamilyMember(index: number) {
     this.familyMembers.removeAt(index);
   }
-
+  
   submit() {
     if (this.registrationForm.valid) {
       const registrationData = this.registrationForm.value;

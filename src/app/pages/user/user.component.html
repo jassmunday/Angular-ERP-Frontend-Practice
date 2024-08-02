@@ -32,34 +32,40 @@
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <h3>{{ isEditMode ? 'Edit User' : 'Add User' }}</h3>
     <div class="grid-container">
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="Full Name">Full Name</label>
         <input id="full_name" formControlName="full_name" type="text"  placeholder="Full Name"/>
       </div>
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="user_name">User Name</label>
         <input id="user_name" formControlName="user_name" type="text" placeholder="User Name" [attr.disabled]="isEditMode ? true : null" />
       </div>
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="password">Password</label>
         <input id="password" formControlName="password" type="password" placeholder="Password"/>
       </div>
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="role">Role</label>
         <input id="role" formControlName="role" type="text" placeholder="Role"/>
       </div>
-      <div class="grid-item">
+      <div class="grid-item-rate">
+        <label for="email">Email</label>
         <input id="email" formControlName="email" type="email" placeholder="Email"/>
       </div>
-      <div class="grid-item">
-      
+      <div class="grid-item-rate">
+         <label for="email_password">Email Password</label>
         <input id="email_password" formControlName="email_password" type="password" placeholder="Email Password"/>
       </div>
-      <div class="grid-item">
-       
+      <div class="grid-item-rate">
+       <label for="mobile_no">Phone No</label>
         <input id="mobile_no" formControlName="mobile_no" type="text" placeholder="Mobile No" />
       </div>
-      <div class="grid-item">
-       
+      <div class="grid-item-rate">
+       <label for="photo">Photo Url</label>
         <input id="photo" formControlName="photo" type="text" placeholder="Photo URL"/>
       </div>
-      <div class="grid-item-rate full-width">
+      <div class="grid-item-rate">
+        <label for="company">Company</label>
         <select id="company" formControlName="company">
           <option value="" disabled>Select Company</option>
           <option *ngFor="let company of companies" [value]="company">{{ company }}</option>

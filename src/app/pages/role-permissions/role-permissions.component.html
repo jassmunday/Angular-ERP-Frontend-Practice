@@ -1,0 +1,159 @@
+<div class="form-container">
+  <h2>Role Permissions</h2>
+  <form [formGroup]="rolePermissionsForm" (ngSubmit)="submit()">
+    <div class="grid-item-rate">
+      <label for="role">Add New Role</label>
+      <input
+        id="role"
+        formControlName="role"
+        type="text"
+        class="form-control"
+      />
+    </div>
+
+    <div formArrayName="rolePermissions">
+      <div class="form-sections">
+        <div
+          *ngFor="let rolePerm of rolePermissions.controls; let i = index"
+          [formGroupName]="i"
+          class="grid-container"
+        >
+          <div class="grid-item">
+            <label for="controller_name_{{ i }}">Controller Name:</label>
+            <input
+              id="controller_name_{{ i }}"
+              formControlName="controller_name"
+              type="text"
+              class="form-control"
+            />
+          </div>
+          <div class="grid-item">
+            <label for="controller_action_{{ i }}">Controller Action:</label>
+            <input
+              id="controller_action_{{ i }}"
+              formControlName="controller_action"
+              type="text"
+              class="form-control"
+            />
+          </div>
+          <div class="grid-item-rate">
+            <label>Add:</label>
+            <input id="add_{{ i }}" formControlName="add" type="checkbox" />
+            <label>Read:</label>
+            <input id="read_{{ i }}" formControlName="read" type="checkbox" />
+            <label>Edit:</label>
+            <input id="edit_{{ i }}" formControlName="edit" type="checkbox" />
+            <label>Delete:</label>
+            <input
+              id="delete_{{ i }}"
+              formControlName="delete"
+              type="checkbox"
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="removeRolePermission(i)"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="addRolePermission()"
+      >
+        Add Permission
+      </button>
+      <button type="submit" class="btn btn-success">Save</button>
+    </div>
+  </form>
+
+  <h2>Existing Roles</h2>
+  <div *ngFor="let role of roles" class="grid-container">
+    <h3>{{ role.role }}</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Controller Name</th>
+          <th>Controller Action</th>
+          <th>Add</th>
+          <th>Read</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let perm of role.rolePermissions; let j = index">
+          <td>
+            <input
+              *ngIf="isEditing[role.role]"
+              [(ngModel)]="perm.controller_name"
+              class="form-control"
+            />
+            <span *ngIf="!isEditing[role.role]">{{
+              perm.controller_name
+            }}</span>
+          </td>
+          <td>
+            <input
+              *ngIf="isEditing[role.role]"
+              [(ngModel)]="perm.controller_action"
+              class="form-control"
+            />
+            <span *ngIf="!isEditing[role.role]">{{
+              perm.controller_action
+            }}</span>
+          </td>
+          <td>
+            <input
+              *ngIf="isEditing[role.role]"
+              type="checkbox"
+              [(ngModel)]="perm.add"
+            />
+            <span *ngIf="!isEditing[role.role]">{{
+              perm.add ? "Yes" : "No"
+            }}</span>
+          </td>
+          <td>
+            <input
+              *ngIf="isEditing[role.role]"
+              type="checkbox"
+              [(ngModel)]="perm.read"
+            />
+            <span *ngIf="!isEditing[role.role]">{{
+              perm.read ? "Yes" : "No"
+            }}</span>
+          </td>
+          <td>
+            <input
+              *ngIf="isEditing[role.role]"
+              type="checkbox"
+              [(ngModel)]="perm.edit"
+            />
+            <span *ngIf="!isEditing[role.role]">{{
+              perm.edit ? "Yes" : "No"
+            }}</span>
+          </td>
+          <td>
+            <input
+              *ngIf="isEditing[role.role]"
+              type="checkbox"
+              [(ngModel)]="perm.delete"
+            />
+            <span *ngIf="!isEditing[role.role]">{{
+              perm.delete ? "Yes" : "No"
+            }}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button (click)="toggleEdit(role.role)">
+      {{ isEditing[role.role] ? "Save" : "Edit" }}
+    </button>
+  </div>
+</div>
