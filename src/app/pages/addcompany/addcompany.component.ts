@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyService } from '../../services/company.service';
+import { Company } from '../../../../models/types';
+import { ToastrService } from 'ngx-toastr';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-addcompany',
@@ -12,12 +15,16 @@ import { CompanyService } from '../../services/company.service';
   styleUrls: ['./addcompany.component.css']
 })
 export class AddcompanyComponent implements OnInit {
+
   combinedForm: FormGroup;
-
+  companies:  Company[] = [];
   isEditMode: boolean = false;
-  currentCompanyCode: string | null = null;
+  currentCompanyId: string  = '';
 
-  constructor(private route: ActivatedRoute, private router: Router, private companyService: CompanyService) {
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private companyService: CompanyService,
+    private toastService: ToastService ) {
     this.combinedForm = new FormGroup({
       // Company details
       code: new FormControl('', Validators.required),
@@ -68,21 +75,30 @@ export class AddcompanyComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.currentCompanyCode = params.get('code') || "";
-      this.isEditMode = !!this.currentCompanyCode;
+  loadCompanies(){
+    this.companyService.getAllCompanies().subscribe((data)=> {
+      this.companies = data;
+      console.log(this.companies);
+    })
+  }
 
-      if (this.isEditMode) {
-        // Fetch the company data using the company code
-        this.loadCompanyData(this.currentCompanyCode);
+  ngOnInit() {
+    this.loadCompanies();
+
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('_id');
+
+      if (id) {
+        this.isEditMode = true;
+        this.loadCompanyData(id);
+        this.currentCompanyId = id;
       }
     });
   }
 
-  loadCompanyData(code: string) {
-    const company = this.companyService.getCompanyByCode(code);
-    if (company) {
+  
+  loadCompanyData(id: string) {
+    this.companyService.getCompanyById(id).subscribe((company) => {
       this.combinedForm.setValue({
         code: company.code,
         name: company.name,
@@ -120,25 +136,49 @@ export class AddcompanyComponent implements OnInit {
         lwf_employer_rate: company.lwf_employer_rate,
         lwf_website: company.lwf_website
       });
-    }
+    }) 
   }
 
   onSubmit() {
+    console.log(this.combinedForm.value);
+    
     if (this.combinedForm.valid) {
+
       const formData = this.combinedForm.value;
+
       console.log(formData);
 
-      if (this.isEditMode) {
-        this.companyService.updateCompany(formData);
+      if (! this.isEditMode) {
+        this.companyService.addCompany(formData).subscribe(() => {
+          this.loadCompanies(); 
+          console.log('Company Added');
+          this.router.navigate(['/masters/companies']);
+        
+          this.toastService.showSuccess('Company Added');
+        })
       } else {
-        this.companyService.addCompany(formData);
+        this.companyService.updateCompany(formData,this.currentCompanyId).subscribe(() => {
+          this.loadCompanies(); 
+          console.log('Company Updated');
+          this.isEditMode = false;
+          this.currentCompanyId = '';
+          this.toastService.showSuccess('Company Updated');
+          this.router.navigate(['/masters/companies']);
+          
+        })
       }
-
+      this.loadCompanies(); 
+      this.isEditMode=false;
+      this.currentCompanyId = '';
       this.router.navigate(['/masters/companies']);
+    }else{
+      console.log('Invalid or Incomplete Data')
+      this.toastService.showError('Errow while Submitting');
     }
   }
 
   cancel() {
     this.router.navigate(['/masters/companies']);
+    this.toastService.showInfo('No Updation or Addition');
   }
 }

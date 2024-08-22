@@ -10,15 +10,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RegistrationService } from '../../services/registration.service';
 import { RelationService } from '../../services/relation.service';
 import { CommonModule } from '@angular/common';
-import { Registration } from '../../../../models/types';
+import { Registration, Relation } from '../../../../models/types';
+import { ToastService } from '../../services/toast.service'; // Import ToastService
 
 type FamilyMemberFormGroup = FormGroup<{
   name: FormControl<string>;
   m_dob: FormControl<string>;
   m_relation: FormControl<string>;
 }>;
-
-
 
 @Component({
   selector: 'app-registration',
@@ -28,11 +27,12 @@ type FamilyMemberFormGroup = FormGroup<{
   styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
+  
   registrationForm: FormGroup;
-  relations: string[];
-  registration: Registration[];
-
+  relations: Relation [] = [];
+  registrations: Registration[] = [];
   isEditMode: boolean = false;
+  editingRegistrationId: string = '';
 
   states: string[] = ['State1', 'State2', 'State3'];
   cities: string[] = ['City1', 'City2', 'City3'];
@@ -42,10 +42,12 @@ export class RegistrationComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private registrationService: RegistrationService,
-    private relationService: RelationService
+    private relationService: RelationService,
+    private toastService: ToastService  // Inject ToastService
   ) {
-    this.relations = this.relationService.getRelations();
-    this.registration = this.registrationService.getRegistrations();
+    this.relationService.getAllRelation().subscribe((data) => {
+      this.relations = data;
+    })
 
     this.registrationForm = new FormGroup({
       unique_id: new FormControl(null, Validators.required),
@@ -83,12 +85,23 @@ export class RegistrationComponent implements OnInit {
     });
   }
 
+  getRegistrations() {
+    return this.registrationService.getAllRegistration().subscribe((data) => {
+      this.registrations = data;
+      console.log(data);
+    });
+  }
+
   ngOnInit() {
+    this.getRegistrations();
+
     this.activatedRoute.paramMap.subscribe((params) => {
-      const id = Number(params.get('id'));
+      const id = params.get('_id');
+      
       if (id) {
         this.isEditMode = true;
         this.loadRegistrationData(id);
+        this.editingRegistrationId = id;
       }
     });
   }
@@ -114,31 +127,35 @@ export class RegistrationComponent implements OnInit {
   }
 
   submit() {
-
     if (this.registrationForm.valid) {
-
       const registrationData = this.registrationForm.value;
 
       if (!this.isEditMode) {
-
-        this.registrationService.addRegistration(registrationData);
-        console.log(this.registration);
-        console.log('Registration Data:', registrationData, this.registration);
-
+        this.registrationService.addRegistration(registrationData).subscribe(() => {
+          this.getRegistrations();
+          console.log("Registration Added");
+          this.toastService.showSuccess("Registration Added Successfully");  // Show success toast
+          this.router.navigate(['/registrations-list']);
+        }, (error) => {
+          console.log("Error Adding Registration", error);
+          this.toastService.showError("Failed to Add Registration");  // Show error toast
+        });
       } else {
-
-        this.registrationService.editRegistration(registrationData);
-        console.log('Registration Data:', registrationData, this.registration);
-
+        this.registrationService.updateRegistration(registrationData,this.editingRegistrationId).subscribe(() => {
+          this.getRegistrations();
+          console.log('Registration Updated');
+          this.toastService.showSuccess("Registration Updated Successfully");  // Show success toast
+          this.isEditMode = false;
+          this.editingRegistrationId = '';
+          this.router.navigate(['/registrations-list']);
+        }, (error) => {
+          console.log("Error Updating Registration", error);
+          this.toastService.showError("Failed to Update Registration");  // Show error toast
+        });
       }
-
-      console.log('Registration Data:', registrationData, this.registration);
-      this.router.navigate(['/registrations-list']);
-
     } else {
-
-      console.log('Incomplete Data', this.registration);
-
+      console.log('Incomplete Data');
+      this.toastService.showWarning("Please fill out all required fields");  // Show warning toast
     }
   }
 
@@ -146,9 +163,9 @@ export class RegistrationComponent implements OnInit {
     this.router.navigate(['/registrations-list']);
   }
 
-  private loadRegistrationData(id: number) {
-    const registration = this.registrationService.getRegistrationById(id);
-    if (registration) {
+  private loadRegistrationData(id: string) {
+    this.registrationService.getRegistrationById(id).subscribe((registration) => {
+
       this.registrationForm.setValue({
         unique_id: registration.unique_id,
         user_name: registration.user_name,
@@ -192,6 +209,6 @@ export class RegistrationComponent implements OnInit {
         });
         familyArray.push(memberGroup);
       });
-    }
-  } 
+    });
+  }
 }

@@ -1,0 +1,61 @@
+  <div class="form-container">
+    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()" class="form">
+
+      <div class="form-item">
+        <label for="roll_no">Roll No</label>
+        <input id="roll_no" type="number" formControlName="roll_no" name="roll_no" />
+      </div>
+
+      <div class="form-item">
+        <label for="name">Name</label>
+        <input type="text" formControlName="name" id="name" name="name" />
+      </div>
+  
+      <div class="form-item">
+        <label for="branch">Branch</label>
+        <input id="branch" type="text" formControlName="branch" name="branch" />
+      </div>
+  
+      <div class="form-item">
+        <label for="year">Year</label>
+        <input id="year" type="text" formControlName="year" name="year" />
+      </div>
+  
+      <div class="form-array">
+        <div formArrayName="marks">
+          <div *ngFor="let mark of marks.controls; let i = index" [formGroupName]="i">
+            <div class="form-item">
+              <label for="subject_{{ i }}">Subject</label>
+              <input id="subject_{{ i }}" type="text" formControlName="subject" />
+            </div>
+  
+            <div class="form-item">
+              <label for="marks_{{ i }}">Marks</label>
+              <input id="marks_{{ i }}" type="number" formControlName="marks" />
+            </div>
+  
+            <button type="button" (click)="removeMarks(i)">Remove Marks</button>
+          </div>
+        </div>
+  
+        <button type="button" (click)="addStudentMarks()">Add Marks</button>
+      </div>
+  
+      <div class="form-buttons">
+        <button type="submit">{{ isEditMode ? 'Update Student' : 'Add Student' }}</button>
+        <button type="button" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+  
+   <div class="students-list">
+      <h2>Students</h2>
+      <ul>
+        <li *ngFor="let student of students">
+          {{ student.name }} ({{ student.roll_no }})
+          <!-- <button type="button" (click)="editStudent(student.roll_no)">Edit</button>
+          <button type="button" (click)="deleteStudent(student.roll_no)">Delete</button> -->
+        </li>
+      </ul>
+    </div> 
+  </div>
+ 

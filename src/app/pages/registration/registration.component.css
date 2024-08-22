@@ -20,6 +20,16 @@ h3 {
   gap: 20px;
 }
 
+.invalid-label::before {
+  content: '*';
+  color: red;
+  margin-right: 4px; /* Adjust spacing as needed */
+}
+
+.err{
+  color: red;
+  
+}
 /* Flex item for each grid container */
 .grid-container {
   flex: 1;
@@ -53,6 +63,8 @@ h3 {
 .grid-item-rate label{
   width: 125px;
 }
+
+
 
 .grid-item-radio {
   margin-bottom: 15px;

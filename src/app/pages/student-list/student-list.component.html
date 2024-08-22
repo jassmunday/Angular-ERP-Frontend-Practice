@@ -1,0 +1,30 @@
+<div class="students-container">
+  <h2>Student List</h2>
+
+  <button (click)="addStudent()" class="add-button">Add Student</button>
+
+  <table class="students-table">
+    <thead>
+      <tr>
+        <th>Roll No</th>
+        <th>Name</th>
+        <th>Branch</th>
+        <th>Year</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.roll_no }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.branch }}</td>
+        <td>{{ student.year }}</td>
+        <td>
+          <button (click)="editStudent(student._id)" class="edit-button">Edit</button>
+          
+          <button (click)="deleteStudent(student._id)" class="delete-button">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

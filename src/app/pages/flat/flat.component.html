@@ -1,9 +1,10 @@
-<div class="flat-container">
-    <h2>Manage Flats</h2>
+<div class="flat-management">
+  <h2>Manage Flats</h2>
   
-    <!-- Form to add a new flat -->
-    <form [formGroup]="flatForm" (ngSubmit)="addFlats()" class="form-inline">
-      <div class="form-group">
+  <!-- Form to add a new flat -->
+  <form [formGroup]="flatForm" (ngSubmit)="addFlats()" class="flat-form">
+    <div class="grid-container">
+      <div class="grid-item">
         <label for="flat_no">Flat Number:</label>
         <input
           id="flat_no"
@@ -12,31 +13,38 @@
           placeholder="Enter flat number"
         />
       </div>
-  
-      <div class="form-group">
-        <label for="flat_fee">Flat Fee:</label>
+      <div class="grid-item">
+        <label for="flat_name">Flat Name:</label>
+        <input
+          id="flat_name"
+          type="text"
+          formControlName="flat_name"
+          placeholder="Enter flat name"
+        />
+      </div>
+      <div class="grid-item full-width">
+        <label for="flat_fee">Flat Price:</label>
         <input
           id="flat_fee"
           type="text"
-          formControlName="flat_fee"
+          formControlName="flat_price"
           placeholder="Enter flat fee"
         />
       </div>
+    </div>
+    <button type="submit" class="submit-button">Add Flat</button>
+  </form>
   
-      <button type="submit" class="btn btn-primary">Add Flat</button>
-    </form>
-  
-    <!-- List of existing flats -->
-    <h3>Existing Flats</h3>
-    <ul class="flat-list">
-      <li *ngFor="let flat of flats">
-        <span class="flat-info">
-          Flat No: {{ flat.flat_no }}, Fee: {{ flat.flat_fee }}
-        </span>
-        <button (click)="deleteFlats(flat.flat_no)" class="delete-button">
-          Delete
-        </button>
-      </li>
-    </ul>
-  </div>
-  
+  <!-- List of existing flats -->
+  <h3>Existing Flats</h3>
+  <ul class="flat-list">
+    <li *ngFor="let flat of flats">
+      <span class="flat-info">
+        Flat No: {{ flat.flat_no }}, Fee: {{ flat.flat_price }}
+      </span>
+      <button (click)="deleteFlats(flat._id || '')" class="delete-button">
+        Delete
+      </button>
+    </li>
+  </ul>
+</div>

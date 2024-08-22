@@ -3,6 +3,7 @@
     <div class="form-sections">
       <div class="grid-container">
         <h3>Company Details</h3>
+
         <div class="grid-item-rate">
           <label for="code">Company Code</label>
           <input
@@ -10,8 +11,10 @@
             type="text"
             formControlName="code"
             placeholder="Company Code"
+            [readOnly]="isEditMode"
           />
         </div>
+
         <div class="grid-item-rate">
           <label for="name">Company Name</label>
           <input
@@ -21,6 +24,7 @@
             placeholder="Name"
           />
         </div>
+
         <div class="grid-item-rate">
           <label for="address">Address</label>
           <input
@@ -30,6 +34,7 @@
             placeholder="Address"
           />
         </div>
+
         <div class="grid-item-rate">
           <label for="city">City</label>
           <input
@@ -54,6 +59,7 @@
           <label for="phone">Phone No</label>
           <input type="tel" formControlName="phone" placeholder="Phone No" />
         </div>
+
         <div class="grid-item-rate full-width">
           <label for="email">Email</label>
           <input
@@ -75,6 +81,7 @@
             placeholder="Director Name"
           />
         </div>
+
         <div class="grid-item-rate">
           <label for="md_address">Address</label>
           <input
@@ -84,6 +91,7 @@
             placeholder="Address"
           />
         </div>
+
         <div class="grid-item-rate">
           <label for="md_mobile">Mobile No</label>
           <input
@@ -93,6 +101,7 @@
             placeholder="Phone No"
           />
         </div>
+
         <div class="grid-item-rate">
           <label for="md_designation">Designation</label>
           <input
@@ -101,6 +110,7 @@
             placeholder="Designation"
           />
         </div>
+
       </div>
 
       <div class="grid-container">
@@ -114,6 +124,7 @@
             placeholder="Bank Name"
           />
         </div>
+
         <div class="grid-item-rate">
           <label for="account">Account No</label>
           <input
@@ -123,6 +134,7 @@
             placeholder="Account No"
           />
         </div>
+
         <div class="grid-item-rate">
           <label for="ifsc_code">IFSC Code</label>
           <input
@@ -132,6 +144,7 @@
             placeholder="IFSC Code"
           />
         </div>
+
         <div class="grid-item-rate">
           <label for="branch_name">Branch name</label>
           <input
@@ -141,6 +154,7 @@
             placeholder="Branch Name"
           />
         </div>
+
         <div class="grid-item-rate">
           <label for="branch_address">Branch address</label>
           <input
@@ -150,10 +164,12 @@
             placeholder="Branch Address"
           />
         </div>
+
       </div>
 
       <div class="grid-container">
         <h3>Provident Fund Details</h3>
+        
         <label for="pf_applicable"> PF Applicable</label>
         <input
           id="pf_applicable"
@@ -349,7 +365,7 @@
       </div>
     </div>
 
-    <button type="submit" [disabled]="combinedForm.invalid">Submit</button>
+    <button type="submit" >Submit</button>
     <button type="button" (click)="cancel()">Cancel</button>
   </div>
 </form>

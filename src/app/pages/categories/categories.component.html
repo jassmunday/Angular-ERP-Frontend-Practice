@@ -1,39 +1,52 @@
-<div class="categories-container container mt-5">
-  <h4 class="mb-4">Manage Categories</h4>
-
-  <form [formGroup]="categoryForm" (ngSubmit)="addCategory()" class="form-inline mb-3">
-      <div class="form-group mr-2">
-          <input type="text" 
-                 class="form-control" 
-                 placeholder="Category" 
-                 [formControl]="category">
-      </div>
-      <button type="submit" class="btn btn-primary mr-2">
-          {{editingCategory ? 'Save Changes' : 'Add New'}}
-      </button>
-      <button *ngIf="editingCategory" 
-              type="button" 
-              class="btn btn-secondary" 
-              (click)="cancelEdit()">
-          Cancel
-      </button>
-  </form>
+<div class="flat-management">
+    <h2>Manage Categories</h2>
   
-  <table class="table table-striped">
-      <thead>
-          <tr>
-              <th>Category Name</th>
-              <th>Actions</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let category of categories">
-              <td>{{ category }}</td>
-              <td>
-                  <button (click)="editCategory(category)" class="btn btn-sm btn-warning mr-2">Edit</button>
-                  <button (click)="deleteCategory(category)" class="btn btn-sm btn-danger">Delete</button>
-              </td> 
-          </tr>
-      </tbody>
-  </table>
-</div>
+    <!-- Form to add or update a category -->
+    <form [formGroup]="categoryForm" (ngSubmit)="addCategory()" class="flat-form">
+      <div class="grid-container">
+        <div class="grid-item">
+          <label for="category_no">Category Number:</label>
+          <input
+            id="category_no"
+            type="text"
+            formControlName="category_no"
+            placeholder="Enter category number"
+            [class.is-invalid]="categoryForm.get('category_no')?.invalid && categoryForm.get('category_no')?.touched"
+          />
+          <div *ngIf="categoryForm.get('category_no')?.invalid && categoryForm.get('category_no')?.touched" class="invalid-feedback">
+            Category number is required.
+          </div>
+        </div>
+        <div class="grid-item">
+          <label for="category_name">Category Name:</label>
+          <input
+            id="category_name"
+            type="text"
+            formControlName="category_name"
+            placeholder="Enter category name"
+            [class.is-invalid]="categoryForm.get('category_name')?.invalid && categoryForm.get('category_name')?.touched"
+          />
+          <div *ngIf="categoryForm.get('category_name')?.invalid && categoryForm.get('category_name')?.touched" class="invalid-feedback">
+            Category name is required.
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="submit-button" [disabled]="categoryForm.invalid">
+        {{ editingCategory ? 'Update Category' : 'Add Category' }}
+      </button>
+    </form>
+  
+    <!-- List of existing categories -->
+    <h3>Category List</h3>
+    <ul class="flat-list">
+      <li *ngFor="let category of categories">
+        <span class="flat-info">
+          Category No: {{ category.category_no }}, Name: {{ category.category_name }}
+        </span>
+        <button (click)="deleteCategory(category._id || '')" class="delete-button">
+          Delete
+        </button>
+      </li>
+    </ul>
+  </div>
+  

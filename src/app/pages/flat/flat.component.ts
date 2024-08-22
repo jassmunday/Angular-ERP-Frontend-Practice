@@ -4,6 +4,7 @@ import { Flats } from '../../../../models/types';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'app-flat',
   standalone: true,
@@ -14,34 +15,39 @@ import { CommonModule } from '@angular/common';
 export class FlatComponent {
   // Dependency Injection
   flatForm: FormGroup; 
-  public flats: Flats [] = [];
+  flats: Flats [] = [];
 
   constructor(private flatService: FlatService){
-    this.flats = this.flatService.getFlats();
+   this.loadFlats();
 
     this.flatForm = new FormGroup({
       flat_no: new FormControl(''),
-      flat_fee: new FormControl('')
+      flat_name: new FormControl(''),
+      flat_price: new FormControl('')
     });
   }
   
+  ngOnInit(): void {
+   this.loadFlats(); 
+  }
+  loadFlats(){
+    this.flatService.getAllFlats().subscribe((data) => {
+      this.flats = data;
+      console.log(this.flats);
+    })
+  }
   addFlats() {
-    const value = this.flatForm.value;
-    const duplicateFlat = this.flats.find(flat => flat.flat_no === value.flat_no);
-
-    if (duplicateFlat) {
-      alert('Flat number already exists!');
-      return;
-    }
-
-    this.flatService.addFlats(value);
-    this.flats = this.flatService.getFlats();
-    this.flatForm.reset();
+    const newFlat = this.flatForm.value;
+    this.flatService.addNewFlat(newFlat).subscribe(() => {
+      this.loadFlats();
+    })   
   }
 
-  deleteFlats(flat_no: number) {
-    this.flatService.deleteFlats(flat_no);
-    this.flats = this.flatService.getFlats();
-    this.flatForm.reset();
+  deleteFlats(id: string) {
+    this.flatService.deleteFlat(id).subscribe(() => {
+      this.loadFlats();
+      this.flatForm.reset();
+    })
+   
   }
 }

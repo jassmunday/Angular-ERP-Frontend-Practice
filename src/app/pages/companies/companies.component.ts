@@ -3,6 +3,7 @@ import { Company } from '../../../../models/types';
 import { CompanyService } from '../../services/company.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-companies',
@@ -13,19 +14,36 @@ import { CommonModule } from '@angular/common';
 })
 export class CompaniesComponent {
 
-  companies: Company[];
+  companies: Company[] = [];
 
-  constructor(private companyService: CompanyService, private router: Router) {
-    this.companies = this.companyService.getCompanies();
+  constructor(private companyService: CompanyService, private router: Router, private toastService: ToastService) {
+  }
+  ngOnInit() {
+    this.loadCompanies();
   }
 
-  deleteCompany(code: string) {
-    this.companyService.deleteCompany(code);
-    this.companies = this.companyService.getCompanies(); // Refresh the list after deletion
+  loadCompanies(){
+    this.companyService.getAllCompanies().subscribe((companies)=> {
+      this.companies = companies;
+      console.log(this.companies)
+    })
   }
 
-  editCompany(company: Company) {
-    this.router.navigate(['/edit-company', company.code]);
+  deleteCompany(_id: string | undefined ) {
+    console.log(_id);
+    if (_id) {
+      this.companyService.deleteCompany(_id).subscribe(() => {
+        this.loadCompanies();
+        this.toastService.showWarning('Company Deleted');
+        console.log(this.loadCompanies());
+      });
+    } else {
+      console.error('Invalid Company ID');
+    }
+  }
+  
+  editCompany(_id: string | undefined) {
+    this.router.navigate(['/edit-company', _id]);
   }
 
   addNewCompany() {

@@ -1,25 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { User } from '../../../../models/types';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports:[ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent implements OnInit {
-  users: User[];
+  
+  users: User[] = [];
+  user: User | null = null;
   userForm: FormGroup;
+  updatingUserId: string = '';
   companies = ['Jain Colony', 'Tech Solutions', 'Innovate Inc.'];
   isEditMode: boolean = false;
 
-  constructor(private userService: UsersService) {
-    this.users = this.userService.getAllUsers();
-
+  constructor(
+    private userService: UsersService,
+    private toastService: ToastService // Inject ToastService
+  ) {
     this.userForm = new FormGroup({
       full_name: new FormControl('', Validators.required),
       user_name: new FormControl('', Validators.required),
@@ -42,10 +52,27 @@ export class UserComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadUsers();
+  }
+
+  loadUsers() {
+    this.userService.getUsers().subscribe(
+      (data) => {
+        this.users = data;
+        console.log(this.users);
+      },
+      (error) => {
+        this.toastService.showError('Failed to load users');
+      }
+    );
+  }
 
   editUser(user: User) {
     this.isEditMode = true;
+    const id = user._id || '';
+    this.updatingUserId = id;
+
     this.userForm.setValue({
       full_name: user.full_name,
       user_name: user.user_name,
@@ -59,9 +86,16 @@ export class UserComponent implements OnInit {
     });
   }
 
-  deleteUser(userName: string) {
-    this.userService.deleteUsers(userName);
-    this.users = this.userService.getAllUsers();
+  deleteUser(id: string) {
+    this.userService.dlteUser(id).subscribe(
+      () => {
+        this.loadUsers();
+        this.toastService.showSuccess('User deleted successfully');
+      },
+      (error) => {
+        this.toastService.showError('Failed to delete user');
+      }
+    );
   }
 
   onSubmit() {
@@ -70,13 +104,32 @@ export class UserComponent implements OnInit {
       console.log(formData);
 
       if (this.isEditMode) {
-        this.userService.editUsers(formData);
+        this.userService.updateUser(this.updatingUserId, formData).subscribe(
+          () => {
+            this.loadUsers();
+            this.toastService.showSuccess('User updated successfully');
+            this.isEditMode = false;
+            this.updatingUserId = '';
+          },
+          (error: any) => {
+            this.toastService.showError('Failed to update user');
+          }
+        );
       } else {
-        this.userService.addUsers(formData);
+        this.userService.createUser(formData).subscribe(
+          () => {
+            this.loadUsers();
+            this.toastService.showSuccess('User created successfully');
+          },
+          (error) => {
+            this.toastService.showError('Failed to create user');
+          }
+        );
       }
-
-      this.users = this.userService.getAllUsers();
+      this.loadUsers();
       this.resetForm();
+    } else {
+      this.toastService.showWarning('Please fill all required fields');
     }
   }
 

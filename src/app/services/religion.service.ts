@@ -1,20 +1,33 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Religion } from '../../../models/types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReligionService {
-  private religions: string[] = ['SIKH','HINDU','MUSLIM','CHRISTAN'];
-  // An Observable object can be created to notify all the subscribers 
-  // about the changes in the array
-  getReligions(){
-    return this.religions;
+  private baseUrl = 'http://localhost:3000/api/religions';
+ 
+
+  http: HttpClient
+  constructor(http: HttpClient ) {
+    this.http = http;
   }
-  addNewReligions(relation:string){
-    this.religions.push(relation);
+
+  getAllReligion(): Observable<Religion[]> {
+    return this.http.get<Religion[]>(`${this.baseUrl}`);
   }
-  deleteReligions(religion:string){
-    this.religions = this.religions.filter(value => value !== religion);
+  getReligionById(id: string): Observable<Religion>{
+    return this.http.get<Religion>(`${this.baseUrl}/${id}`)
   }
-  constructor() { }
+  addNewReligion(newReligion: Religion): Observable<Religion> {
+    return this.http.post<Religion>(`${this.baseUrl}`,newReligion);
+  }
+  deleteReligion(id:string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+  updateReligion(updatedReligion: Religion, id:string): Observable<Religion>{
+    return this.http.put<Religion>(`${this.baseUrl}/${id}`,updatedReligion);
+  }
 }

@@ -1,19 +1,33 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Relation } from '../../../models/types';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RelationService {
-  private relations: string[] = ['FATHER','MOTHER','SON','DAUGHTER'];
-  // An Observable object can be created to notify all the subscribers 
-  // about the changes in the array
-  getRelations(){
-    return this.relations;
+  private baseUrl = 'http://localhost:3000/api/relations';
+ 
+
+  http: HttpClient
+  constructor(http: HttpClient ) {
+    this.http = http;
   }
-  addNewRelation(relation:string){
-    this.relations.push(relation);
+
+  getAllRelation(): Observable<Relation[]> {
+    return this.http.get<Relation[]>(`${this.baseUrl}`);
   }
-  deleteRelation(relation:string){
-    this.relations = this.relations.filter(value => value !== relation);
+  getRelationById(id: string): Observable<Relation>{
+    return this.http.get<Relation>(`${this.baseUrl}/${id}`)
+  }
+  addNewRelation(newRelation: Relation): Observable<Relation> {
+    return this.http.post<Relation>(`${this.baseUrl}`,newRelation);
+  }
+  deleteRelation(id:string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+  updateRelation(updatedRelation: Relation, id:string): Observable<Relation>{
+    return this.http.put<Relation>(`${this.baseUrl}/${id}`,updatedRelation);
   }
 }

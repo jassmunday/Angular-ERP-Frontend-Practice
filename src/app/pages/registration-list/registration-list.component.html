@@ -23,8 +23,8 @@
         <td>{{ registration.joining_date }}</td>
         <td>{{ registration.gender }}</td>
         <td>
-          <button (click)="editRegistration(registration.unique_id)">Edit</button>
-          <button (click)="deleteRegistration(registration.unique_id)">Delete</button>
+          <button (click)="editRegistration(registration._id)">Edit</button>
+          <button (click)="deleteRegistration(registration._id)">Delete</button>
         </td>
       </tr>
     </tbody>

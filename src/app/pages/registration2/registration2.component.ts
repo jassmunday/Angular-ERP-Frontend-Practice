@@ -8,7 +8,9 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Registration2, FamilyMember } from '../../../../models/types';
+import { Registration2 } from '../../../../models/types';
+
+import { switchMap } from 'rxjs/operators';
 import { Regsitration2Service } from '../../services/regsitration2.service';
 
 type FamilyMemberFormGroup = FormGroup<{
@@ -23,7 +25,6 @@ type FamilyMemberFormGroup = FormGroup<{
   templateUrl: './registration2.component.html',
   styleUrls: ['./registration2.component.css'],
 })
-
 export class Registration2Component implements OnInit {
   registrationForm: FormGroup;
   registration: Registration2[];
@@ -32,10 +33,8 @@ export class Registration2Component implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private registrationService: Regsitration2Service
-
   ) {
-
-    this.registration = this.registrationService.getRegistrations();
+    this.registration = [];
 
     this.registrationForm = new FormGroup({
       id: new FormControl(0, Validators.required),
@@ -51,10 +50,17 @@ export class Registration2Component implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.paramMap.subscribe(params => {
-      const id = Number(params.get('id'));
-      if (id) {
-        this.loadRegistrationData(id);
+    this.activatedRoute.paramMap.pipe(
+      switchMap(params => {
+        const id = Number(params.get('id'));
+        if (id) {
+          return this.registrationService.getRegistrationById(id);
+        }
+        return [];
+      })
+    ).subscribe(registration => {
+      if (registration) {
+        this.loadRegistrationData(registration);
       }
     });
   }
@@ -75,42 +81,46 @@ export class Registration2Component implements OnInit {
   removeFamilyMember(index: number) {
     this.familyMembers.removeAt(index);
   }
-  
+
   submit() {
     if (this.registrationForm.valid) {
-      const registrationData = this.registrationForm.value;
-      this.registrationService.addRegistration(registrationData);
-
-      console.log(this.registration);
-      console.log('Registration Data:', registrationData, this.registration);
+      const registrationData = this.registrationForm.value as Registration2;
+      if (registrationData.id === 0) {
+        this.registrationService.addRegistration(registrationData).subscribe(() => {
+          console.log('Data Added Successfully');
+          this.router.navigate(['/registrations']); // Redirect after adding
+        });
+      } else {
+        this.registrationService.editRegistration(registrationData).subscribe(() => {
+          console.log('Data Updated Successfully');
+          this.router.navigate(['/registrations']); // Redirect after editing
+        });
+      }
     } else {
-      console.log('Incomplete Data', this.registration);
+      console.log('Incomplete Data');
     }
   }
 
-  private loadRegistrationData(id: number) {
-    const registration = this.registrationService.getRegistrationById(id);
-    if (registration) {
-      this.registrationForm.setValue({
-        id: registration.id,
-        user_name: registration.user_name,
-        email_id: registration.email_id,
-        joining_date: registration.joining_date,
-        gender: registration.gender,
-        phone: registration.phone,
-        father_husband_name: registration.father_husband_name,
-        father_husband_relation: registration.father_husband_relation,
-        familyMembers: [],
+  private loadRegistrationData(registration: Registration2) {
+    this.registrationForm.setValue({
+      id: registration.id,
+      user_name: registration.user_name,
+      email_id: registration.email_id,
+      joining_date: registration.joining_date,
+      gender: registration.gender,
+      phone: registration.phone,
+      father_husband_name: registration.father_husband_name,
+      father_husband_relation: registration.father_husband_relation,
+      familyMembers: [],
+    });
+    // Populate familyMembers after form is set
+    const familyArray = this.registrationForm.get('familyMembers') as FormArray;
+    registration.familyMembers.forEach(member => {
+      const memberGroup = new FormGroup({
+        name: new FormControl(member.name, Validators.required),
+        m_relation: new FormControl(member.m_relation, Validators.required),
       });
-      // Populate familyMembers after form is set
-      const familyArray = this.registrationForm.get('familyMembers') as FormArray;
-      registration.familyMembers.forEach(member => {
-        const memberGroup = new FormGroup({
-          name: new FormControl(member.name, Validators.required),
-          m_relation: new FormControl(member.m_relation, Validators.required),
-        });
-        familyArray.push(memberGroup);
-      });
-    }
+      familyArray.push(memberGroup);
+    });
   }
 }

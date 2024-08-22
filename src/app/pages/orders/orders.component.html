@@ -1,0 +1,177 @@
+<div class="order-form-container">
+  <div class="form-array-heading">
+    <h2>{{ isEditForm ? "Edit Order" : "Create New Order" }}</h2>
+  </div>
+  
+  <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+    <!-- Order Details -->
+    <div class="form-group">
+      <label for="order_id">Order ID</label>
+      <input
+        id="order_id"
+        type="number"
+        formControlName="order_id"
+        placeholder="Enter Order ID"
+        [readonly]="isEditForm"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="customer_code">Customer</label>
+      <select
+        id="customer_code"
+        formControlName="customer_code"
+        (change)="onCustomerChange($event)"
+      >
+        <option *ngFor="let customer of customer" [value]="customer.c_code">
+          {{ customer.c_name }}
+        </option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input
+        id="phone"
+        type="text"
+        formControlName="phone"
+        readonly
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input
+        id="address"
+        type="text"
+        formControlName="address"
+        readonly
+      />
+    </div>
+    
+    <div class="form-group">
+      <label for="order_date">Order Date</label>
+      <input id="order_date" type="text" formControlName="order_date" readonly/>
+    </div>
+
+    <div class="form-group">
+      <label for="payment_mode">Payment Mode</label>
+      <select id="payment_mode" formControlName="payment_mode">
+        <option value="cash">Cash</option>
+        <option value="credit">Credit</option>
+        <option value="online">Online</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="order_total">Order Total</label>
+      <input
+        id="order_total"
+        type="number"
+        formControlName="order_total"
+        readonly
+      />
+    </div>
+
+    <!-- Order Items -->
+    <div class="form-array-container">
+      <div class="form-array-heading">
+        <h2>Order Items</h2>
+        <button type="button" (click)="addOrderItems()">Add Item</button>
+      </div>
+      
+      <div formArrayName="order_items" class="order-items">
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Name</th>
+              <th>UOM</th>
+              <th>Quantity</th>
+              <th>Rate</th>
+              <th>Amount</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let item of order_items.controls; let i = index"
+              [formGroupName]="i"
+            >
+              <td>
+                <select
+                  id="code_{{i}}"
+                  formControlName="code"
+                  (change)="onProductChange(i)"
+                >
+                  <option
+                    *ngFor="let product of products"
+                    [value]="product.p_code"
+                  >
+                    {{ product.p_code }}
+                  </option>
+                </select>
+              </td>
+              <td>
+                <input id="name_{{i}}" type="text" formControlName="name" readonly />
+              </td>
+              <td>
+                <input id="uom_{{i}}" type="text" formControlName="uom" readonly />
+              </td>
+              <td>
+                <input
+                  id="quantity_{{i}}"
+                  type="number"
+                  (input)="calculateAmount(i)"
+                  formControlName="quantity"
+                  placeholder="Enter Quantity"
+                />
+              </td>
+              <td>
+                <input
+                  id="rate_{{i}}"
+                  type="number"
+                  formControlName="rate"
+                  (input)="calculateAmount(i)"
+                  placeholder="Enter Rate"
+                />
+              </td>
+              <td>
+                <input id="amount_{{i}}" type="number" formControlName="amount" readonly/>
+              </td>
+              <td>
+                <button type="button" (click)="removeOrderItems(i)">
+                  Remove
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Submit and Cancel Buttons -->
+    <div class="form-actions">
+      <button type="submit" [disabled]="orderForm.invalid">
+        {{ isEditForm ? "Update Order" : "Create Order" }}
+      </button>
+      <button type="button" (click)="cancel()">Cancel</button>
+    </div>
+  </form>
+
+  <!-- Orders List -->
+  <!-- <div class="orders-list">
+    <h2>Existing Orders</h2>
+    <ul>
+      <li *ngFor="let order of orders">
+        <span
+          >{{ order.order_id }} - {{ order.customer_code }} -
+          {{ order.order_total }}</span
+        >
+        <button (click)="editOrder(order._id || '')">Edit</button>
+        <button (click)="deleteOrder(order._id || '')">Delete</button>
+      </li>
+    </ul>
+  </div> -->
+</div>
+
+

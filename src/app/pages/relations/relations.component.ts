@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RelationService } from '../../services/relation.service';
 import { CommonModule } from '@angular/common';
+import { Relation } from '../../../../models/types';
 
 @Component({
   selector: 'app-relations',
@@ -11,29 +12,40 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./relations.component.css']
 })
 export class RelationsComponent {
-  relations: string[];
+  relationForm: FormGroup;
+  relations: Relation[] = [];
+  
+  editingRelation: string | null = null; // Initially set to null
 
-  relationForm = new FormGroup({
-    relationValue: new FormControl('', [Validators.required])
-  });
-
-  constructor(public relationService: RelationService) {
-    this.relations = this.relationService.getRelations();
+  constructor(private relationService: RelationService) {
+    this.loadRelations();
+    this.relationForm = new FormGroup({
+      relation_id: new FormControl('', [Validators.required]),
+      relation_name: new FormControl('', [Validators.required]),
+    });
   }
-
+ ngOnInit(): void {
+  //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+  //Add 'implements OnInit' to the class.
+  this.loadRelations();
+ }
+  loadRelations() {
+    this.relationService.getAllRelation().subscribe((data) => {
+      this.relations = data;
+    });
+  }
   addRelation() {
-    const value = this.relationForm.value.relationValue?.trim() || "";
-    if (value && !this.relations.includes(value)) {
-      this.relationService.addNewRelation(value);
-      this.relations = this.relationService.getRelations(); // Refresh the list
-      this.relationForm.reset(); // Clear the input field
-    }
+    const newRelation = this.relationForm.value;
+    this.relationService.addNewRelation(newRelation).subscribe(() => {
+      this.loadRelations();
+    })   
   }
 
-  deleteRelation(relation: string) {
-    if (this.relations.includes(relation)) {
-      this.relationService.deleteRelation(relation);
-      this.relations = this.relationService.getRelations(); // Refresh the list
-    }
+  deleteRelation(id: string) {
+    this.relationService.deleteRelation(id).subscribe(() => {
+      this.loadRelations();
+      this.relationForm.reset();
+    })
+   
   }
 }

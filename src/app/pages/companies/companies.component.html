@@ -24,8 +24,8 @@
           <td>{{ company.phone }}</td>
           <td>{{ company.email }}</td>
           <td>
-            <button (click)="editCompany(company)">Edit</button>
-            <button (click)="deleteCompany(company.code!)">Delete</button>
+            <button (click)="editCompany(company._id)">Edit</button>
+            <button (click)="deleteCompany(company._id)">Delete</button>
           </td>
         </tr>
       </tbody>

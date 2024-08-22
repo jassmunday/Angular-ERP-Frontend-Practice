@@ -2,9 +2,16 @@
   <div class="form-sections">
     <div class="grid-container">
       <h3>User Information</h3>
-
+    
       <div class="grid-item-rate">
-        <label for="unique_id">Unique ID</label>
+        <label 
+          for="unique_id" 
+          [ngClass]="{
+            'invalid-label': registrationForm.get('unique_id')?.touched && registrationForm.get('unique_id')?.invalid
+          }"
+        >
+          Unique ID
+        </label>
         <input
           id="unique_id"
           formControlName="unique_id"
@@ -12,71 +19,97 @@
           placeholder="Unique ID"
           [readOnly]="isEditMode"
         />
-        <h5
-          *ngIf="
-            registrationForm.get('unique_id')?.touched &&
-            registrationForm.get('unique_id')?.invalid
-          "
-        >
-          Unique ID is required
-        </h5>
       </div>
-
+      <h5
+        class="err"
+        *ngIf="
+          registrationForm.get('unique_id')?.touched &&
+          registrationForm.get('unique_id')?.invalid
+        "
+      >
+        Unique ID is required
+      </h5>
+    
       <div class="grid-item-rate">
-        <label for="user_name">User Name</label>
+        <label
+          for="user_name"
+          [ngClass]="{
+            'invalid-label': registrationForm.get('user_name')?.touched && registrationForm.get('user_name')?.invalid
+          }"
+        >
+          User Name
+        </label>
         <input
           id="user_name"
           formControlName="user_name"
           type="text"
           placeholder="User Name"
         />
-        <h5
-          *ngIf="
-            registrationForm.get('user_name')?.touched &&
-            registrationForm.get('user_name')?.invalid
-          "
-        >
-          User Name is required
-        </h5>
       </div>
-
+      <h5
+        class="err"
+        *ngIf="
+          registrationForm.get('user_name')?.touched &&
+          registrationForm.get('user_name')?.invalid
+        "
+      >
+        User Name is required
+      </h5>
+    
       <div class="grid-item-rate">
-        <label for="dob">Date Of Birth</label>
+        <label
+          for="dob"
+          [ngClass]="{
+            'invalid-label': registrationForm.get('dob')?.touched && registrationForm.get('dob')?.invalid
+          }"
+        >
+          Date Of Birth
+        </label>
         <input id="dob" formControlName="dob" type="date" />
-        <h5
-          *ngIf="
-            registrationForm.get('dob')?.touched &&
-            registrationForm.get('dob')?.invalid
-          "
-        >
-          Date of Birth is required
-        </h5>
       </div>
-
+      <h5
+        class="err"
+        *ngIf="
+          registrationForm.get('dob')?.touched &&
+          registrationForm.get('dob')?.invalid
+        "
+      >
+        Date of Birth is required
+      </h5>
+    
       <div class="grid-item-rate">
-        <label for="joining_date">Joining Date</label>
-        <input id="joining_date" formControlName="joining_date" type="date" />
-        <h5
-          *ngIf="
-            registrationForm.get('joining_date')?.touched &&
-            registrationForm.get('joining_date')?.invalid
-          "
+        <label
+          for="joining_date"
+          [ngClass]="{
+            'invalid-label': registrationForm.get('joining_date')?.touched && registrationForm.get('joining_date')?.invalid
+          }"
         >
-          Joining Date is required
-        </h5>
+          Joining Date
+        </label>
+        <input id="joining_date" formControlName="joining_date" type="date" />
       </div>
-
+      <h5
+        class="err"
+        *ngIf="
+          registrationForm.get('joining_date')?.touched &&
+          registrationForm.get('joining_date')?.invalid
+        "
+      >
+        Joining Date is required
+      </h5>
+    
       <div class="grid-item-radio">
-        <label>Gender</label>
+        <label
+          [ngClass]="{
+            'invalid-label': registrationForm.get('gender')?.touched && registrationForm.get('gender')?.invalid
+          }"
+        >
+          Gender
+        </label>
         <div class="content-radio">
           <div>
             <label for="Male">Male</label>
-            <input
-              id="Male"
-              type="radio"
-              formControlName="gender"
-              value="Male"
-            />
+            <input id="Male" type="radio" formControlName="gender" value="Male" />
           </div>
           <div>
             <label for="Female">Female</label>
@@ -89,24 +122,20 @@
           </div>
           <div>
             <label for="other">Other</label>
-            <input
-              id="other"
-              type="radio"
-              formControlName="gender"
-              value="Other"
-            />
+            <input id="other" type="radio" formControlName="gender" value="Other" />
           </div>
         </div>
-        <h5
-          *ngIf="
-            registrationForm.get('gender')?.touched &&
-            registrationForm.get('gender')?.invalid
-          "
-        >
-          Gender is required
-        </h5>
       </div>
-
+      <h5
+        class="err"
+        *ngIf="
+          registrationForm.get('gender')?.touched &&
+          registrationForm.get('gender')?.invalid
+        "
+      >
+        Gender is required
+      </h5>
+    
       <div class="grid-item-rate">
         <label for="photo">Photo URL</label>
         <input
@@ -116,38 +145,54 @@
           placeholder="Photo URL"
         />
       </div>
-
+    
       <div class="grid-item-rate">
         <label for="leaving_date">Leaving Date</label>
         <input id="leaving_date" formControlName="leaving_date" type="date" />
       </div>
     </div>
+    
+    
 
     <!-- Personal Information Section -->
 
     <div class="grid-container">
       <h3>Personal Information</h3>
-
+    
       <div class="grid-item-rate">
-        <label for="father_husband_name">Father/Husband Name</label>
+        <label 
+          for="father_husband_name"
+          [ngClass]="{
+            'invalid-label': registrationForm.get('father_husband_name')?.touched && registrationForm.get('father_husband_name')?.invalid
+          }"
+        >
+          Father/Husband Name
+        </label>
         <input
           id="father_husband_name"
           formControlName="father_husband_name"
           type="text"
           placeholder="Father/Husband Name"
         />
-        <h5
-          *ngIf="
-            registrationForm.get('father_husband_name')?.touched &&
-            registrationForm.get('father_husband_name')?.invalid
-          "
-        >
-          Father/Husband Name is required
-        </h5>
       </div>
-
+      <h5 class="err"
+        *ngIf="
+          registrationForm.get('father_husband_name')?.touched &&
+          registrationForm.get('father_husband_name')?.invalid
+        "
+      >
+        Father/Husband Name is required
+      </h5>
+    
       <div class="grid-item-rate">
-        <label for="father_husband_relation">Father/Husband Relation</label>
+        <label 
+          for="father_husband_relation"
+          [ngClass]="{
+            'invalid-label': registrationForm.get('father_husband_relation')?.touched && registrationForm.get('father_husband_relation')?.invalid
+          }"
+        >
+          Father/Husband Relation
+        </label>
         <select
           id="father_husband_relation"
           formControlName="father_husband_relation"
@@ -157,18 +202,25 @@
           <option value="Husband">Husband</option>
           <!-- Add other options if needed -->
         </select>
-        <h5
-          *ngIf="
-            registrationForm.get('father_husband_relation')?.touched &&
-            registrationForm.get('father_husband_relation')?.invalid
-          "
-        >
-          Father/Husband Relation is required
-        </h5>
       </div>
-
+      <h5 class="err"
+        *ngIf="
+          registrationForm.get('father_husband_relation')?.touched &&
+          registrationForm.get('father_husband_relation')?.invalid
+        "
+      >
+        Father/Husband Relation is required
+      </h5>
+    
       <div class="grid-item-rate">
-        <label for="mother_name">Mother Name</label>
+        <label 
+          for="mother_name"
+          [ngClass]="{
+            'invalid-label': registrationForm.get('mother_name')?.touched && registrationForm.get('mother_name')?.invalid
+          }"
+        >
+          Mother Name
+        </label>
         <input
           id="mother_name"
           formControlName="mother_name"
@@ -176,90 +228,126 @@
           placeholder="Mother Name"
         />
       </div>
-
+      <h5 class="err"
+        *ngIf="
+          registrationForm.get('mother_name')?.touched &&
+          registrationForm.get('mother_name')?.invalid
+        "
+      >
+        Mother's name is required
+      </h5>
+    
       <div class="grid-item-rate">
-        <label for="phone">Phone No</label>
+        <label 
+          for="phone"
+          [ngClass]="{
+            'invalid-label': registrationForm.get('phone')?.touched && registrationForm.get('phone')?.invalid
+          }"
+        >
+          Phone No
+        </label>
         <input
           id="phone"
           formControlName="phone"
           type="text"
           placeholder="Phone No"
         />
-        <h5
-          *ngIf="
-            registrationForm.get('phone')?.touched &&
-            registrationForm.get('phone')?.invalid
-          "
-        >
-          Phone number is required and must be in a valid format
-        </h5>
       </div>
-
+      <h5 class="err"
+        *ngIf="
+          registrationForm.get('phone')?.touched &&
+          registrationForm.get('phone')?.invalid
+        "
+      >
+        Phone number is required and must be in a valid format
+      </h5>
+    
       <div class="grid-item-rate">
-        <label for="email_id">Email Id</label>
+        <label 
+          for="email_id"
+          [ngClass]="{
+            'invalid-label': registrationForm.get('email_id')?.touched && registrationForm.get('email_id')?.invalid
+          }"
+        >
+          Email Id
+        </label>
         <input
           id="email_id"
           formControlName="email_id"
           type="email"
           placeholder="Email Id"
         />
-        <h5
-          *ngIf="
-            registrationForm.get('email_id')?.touched &&
-            registrationForm.get('email_id')?.invalid
-          "
-        >
-          A valid email is required
-        </h5>
       </div>
+      <h5 class="err"
+        *ngIf="
+          registrationForm.get('email_id')?.touched &&
+          registrationForm.get('email_id')?.invalid
+        "
+      >
+        A valid email is required
+      </h5>
     </div>
-
+    
     <!-- Additional Information Section -->
 
     <div class="grid-container">
       <h3>Additional Information</h3>
-
+    
       <div class="grid-item-rate">
-        <label for="aadhar_no">Aadhar No</label>
+        <label 
+          for="aadhar_no" 
+          [ngClass]="{
+            'invalid-label': registrationForm.get('aadhar_no')?.touched && registrationForm.get('aadhar_no')?.invalid
+          }"
+          >Aadhar No</label
+        >
         <input
           id="aadhar_no"
           formControlName="aadhar_no"
           type="text"
           placeholder="Aadhar No"
         />
-        <h5
-          *ngIf="
-            registrationForm.get('aadhar_no')?.touched &&
-            registrationForm.get('aadhar_no')?.invalid
-          "
-        >
-          Aadhar Number is required
-        </h5>
       </div>
-
+      <h5
+        class="err"
+        *ngIf="
+          registrationForm.get('aadhar_no')?.touched &&
+          registrationForm.get('aadhar_no')?.invalid
+        "
+      >
+        Aadhar Number is required
+      </h5>
+    
       <div class="grid-item-rate">
-        <label for="pan_no">PAN No</label>
+        <label
+          for="pan_no"
+          [ngClass]="{
+            'invalid-label': registrationForm.get('pan_no')?.touched && registrationForm.get('pan_no')?.invalid
+          }"
+          >PAN No</label
+        >
         <input
           id="pan_no"
           formControlName="pan_no"
           type="text"
           placeholder="PAN No"
         />
-        <h5
-          *ngIf="
-            registrationForm.get('pan_no')?.touched &&
-            registrationForm.get('pan_no')?.invalid
-          "
-        >
-          PAN Number is required
-        </h5>
       </div>
-
+      <h5
+        class="err"
+        *ngIf="
+          registrationForm.get('pan_no')?.touched &&
+          registrationForm.get('pan_no')?.invalid
+        "
+      >
+        PAN Number is required
+      </h5>
+    
       <div class="grid-item-rate">
         <label for="uan">UAN</label>
         <input id="uan" formControlName="uan" type="text" placeholder="UAN" />
       </div>
-
+    
       <div class="grid-item-rate">
         <label for="religion">Religion</label>
         <input
@@ -269,7 +357,7 @@
           placeholder="Religion"
         />
       </div>
-
+    
       <div class="grid-item-rate">
         <label for="relation">Relation</label>
         <input
@@ -279,9 +367,15 @@
           placeholder="Relation"
         />
       </div>
-
+    
       <div class="grid-item-rate">
-        <label for="flats">Flats</label>
+        <label
+          for="flats"
+          [ngClass]="{
+            'invalid-label': registrationForm.get('flats')?.touched && registrationForm.get('flats')?.invalid
+          }"
+          >Flats</label
+        >
         <input
           id="flats"
           formControlName="flats"
@@ -289,15 +383,30 @@
           placeholder="Flats"
         />
       </div>
+      <h5
+        class="err"
+        *ngIf="
+          registrationForm.get('flats')?.touched &&
+          registrationForm.get('flats')?.invalid
+        "
+      >
+        Flat Number is required
+      </h5>
     </div>
+    
 
     <!-- Bank Information Section -->
 
     <div class="grid-container">
       <h3>Bank Information</h3>
-
+    
       <div class="grid-item-rate">
-        <label for="bank_name">Bank Name</label>
+        <label 
+          for="bank_name" 
+          [ngClass]="{
+            'invalid-label': registrationForm.get('bank_name')?.touched && registrationForm.get('bank_name')?.invalid
+          }"
+          >Bank Name</label>
         <input
           id="bank_name"
           formControlName="bank_name"
@@ -305,9 +414,23 @@
           placeholder="Bank Name"
         />
       </div>
-
+      <h5
+        class="err"
+        *ngIf="
+          registrationForm.get('bank_name')?.touched &&
+          registrationForm.get('bank_name')?.invalid
+        "
+      >
+        Bank Name is required
+      </h5>
+    
       <div class="grid-item-rate">
-        <label for="account_no">Account No</label>
+        <label 
+          for="account_no" 
+          [ngClass]="{
+            'invalid-label': registrationForm.get('account_no')?.touched && registrationForm.get('account_no')?.invalid
+          }"
+          >Account No</label>
         <input
           id="account_no"
           formControlName="account_no"
@@ -315,9 +438,23 @@
           placeholder="Account No"
         />
       </div>
-
+      <h5
+        class="err"
+        *ngIf="
+          registrationForm.get('account_no')?.touched &&
+          registrationForm.get('account_no')?.invalid
+        "
+      >
+        Account No. is required
+      </h5>
+    
       <div class="grid-item-rate">
-        <label for="ifsc_code">IFSC Code</label>
+        <label 
+          for="ifsc_code" 
+          [ngClass]="{
+            'invalid-label': registrationForm.get('ifsc_code')?.touched && registrationForm.get('ifsc_code')?.invalid
+          }"
+          >IFSC Code</label>
         <input
           id="ifsc_code"
           formControlName="ifsc_code"
@@ -325,9 +462,23 @@
           placeholder="IFSC Code"
         />
       </div>
-
+      <h5
+        class="err"
+        *ngIf="
+          registrationForm.get('ifsc_code')?.touched &&
+          registrationForm.get('ifsc_code')?.invalid
+        "
+      >
+        IFSC Code is required
+      </h5>
+    
       <div class="grid-item-rate">
-        <label for="bank_address">Bank Address</label>
+        <label 
+          for="bank_address" 
+          [ngClass]="{
+            'invalid-label': registrationForm.get('bank_address')?.touched && registrationForm.get('bank_address')?.invalid
+          }"
+          >Bank Address</label>
         <input
           id="bank_address"
           formControlName="bank_address"
@@ -335,15 +486,30 @@
           placeholder="Bank Address"
         />
       </div>
+      <h5
+        class="err"
+        *ngIf="
+          registrationForm.get('bank_address')?.touched &&
+          registrationForm.get('bank_address')?.invalid
+        "
+      >
+        Bank Address is required
+      </h5>
     </div>
+    
 
     <!-- Address Information Section -->
 
     <div class="grid-container">
       <h3>Address Information</h3>
-
+    
       <div class="grid-item-rate">
-        <label for="House No">House No</label>
+        <label 
+          for="house_no" 
+          [ngClass]="{
+            'invalid-label': registrationForm.get('house_no')?.touched && registrationForm.get('house_no')?.invalid
+          }"
+          >House No</label>
         <input
           id="house_no"
           formControlName="house_no"
@@ -351,9 +517,23 @@
           placeholder="House No"
         />
       </div>
-
+      <h5
+        class="err"
+        *ngIf="
+          registrationForm.get('house_no')?.touched &&
+          registrationForm.get('house_no')?.invalid
+        "
+      >
+        House Number is required
+      </h5>
+    
       <div class="grid-item-rate">
-        <label for="street_no">Street No</label>
+        <label 
+          for="street_no" 
+          [ngClass]="{
+            'invalid-label': registrationForm.get('street_no')?.touched && registrationForm.get('street_no')?.invalid
+          }"
+          >Street No</label>
         <input
           id="street_no"
           formControlName="street_no"
@@ -361,9 +541,23 @@
           placeholder="Street No"
         />
       </div>
-
+      <h5
+        class="err"
+        *ngIf="
+          registrationForm.get('street_no')?.touched &&
+          registrationForm.get('street_no')?.invalid
+        "
+      >
+        Street Number is required
+      </h5>
+    
       <div class="grid-item-rate">
-        <label for="area">Area</label>
+        <label 
+          for="area" 
+          [ngClass]="{
+            'invalid-label': registrationForm.get('area')?.touched && registrationForm.get('area')?.invalid
+          }"
+          >Area</label>
         <input
           id="area"
           formControlName="area"
@@ -371,92 +565,128 @@
           placeholder="Area"
         />
       </div>
-
+      <h5
+        class="err"
+        *ngIf="
+          registrationForm.get('area')?.touched &&
+          registrationForm.get('area')?.invalid
+        "
+      >
+        Area is required
+      </h5>
+    
       <div class="grid-item-rate">
-        <label for="city">City</label>
+        <label 
+          for="city" 
+          [ngClass]="{
+            'invalid-label': registrationForm.get('city')?.touched && registrationForm.get('city')?.invalid
+          }"
+          >City</label>
         <select id="city" formControlName="city" placeholder="Select City">
           <option value="" disabled>List Of Cities</option>
           <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
         </select>
-        <h5
-          *ngIf="
-            registrationForm.get('city')?.touched &&
-            registrationForm.get('city')?.invalid
-          "
-        >
-          City is required
-        </h5>
       </div>
-
+      <h5
+        class="err"
+        *ngIf="
+          registrationForm.get('city')?.touched &&
+          registrationForm.get('city')?.invalid
+        "
+      >
+        City is required
+      </h5>
+    
       <div class="grid-item-rate">
-        <label for="state">State</label>
+        <label 
+          for="state" 
+          [ngClass]="{
+            'invalid-label': registrationForm.get('state')?.touched && registrationForm.get('state')?.invalid
+          }"
+          >State</label>
         <select id="state" formControlName="state">
           <option value="" disabled>List Of States</option>
           <option *ngFor="let state of states" [value]="state">
             {{ state }}
           </option>
         </select>
-        <h5
-          *ngIf="
-            registrationForm.get('state')?.touched &&
-            registrationForm.get('state')?.invalid
-          "
-        >
-          State is required
-        </h5>
       </div>
-
+      <h5
+        class="err"
+        *ngIf="
+          registrationForm.get('state')?.touched &&
+          registrationForm.get('state')?.invalid
+        "
+      >
+        State is required
+      </h5>
+    
       <div class="grid-item-rate">
-        <label for="country">Country</label>
+        <label 
+          for="country" 
+          [ngClass]="{
+            'invalid-label': registrationForm.get('country')?.touched && registrationForm.get('country')?.invalid
+          }"
+          >Country</label>
         <select id="country" formControlName="country">
           <option value="" disabled>List Of countries</option>
           <option *ngFor="let country of countries" [value]="country">
             {{ country }}
           </option>
         </select>
-        <h5
-          *ngIf="
-            registrationForm.get('country')?.touched &&
-            registrationForm.get('country')?.invalid
-          "
-        >
-          Country is required
-        </h5>
       </div>
+      <h5
+        class="err"
+        *ngIf="
+          registrationForm.get('country')?.touched &&
+          registrationForm.get('country')?.invalid
+        "
+      >
+        Country is required
+      </h5>
     </div>
+    
 
     <!-- Family Members Section -->
 
     <div class="grid-container">
       <h3>Family Members</h3>
-
+    
       <div formArrayName="familyMembers">
         <div
           *ngFor="let member of familyMembers.controls; let i = index"
           [formGroupName]="i"
         >
           <div class="grid-item-rate">
-            <label for="name">Name</label>
+            <label for="name">
+              <span *ngIf="member.get('name')?.invalid">*</span>
+              Name
+            </label>
             <input
               id="name"
               formControlName="name"
               type="text"
               placeholder="Name"
             />
-            <h5
+            <h5 class="err"
               *ngIf="member.get('name')?.touched && member.get('name')?.invalid"
             >
               Name is required
             </h5>
           </div>
-
+    
           <div class="grid-item-rate">
-            <label for="m_relation">Relation</label>
+            <label for="m_relation">
+              <span *ngIf="member.get('m_relation')?.invalid">*</span>
+              Relation
+            </label>
             <select id="m_relation" formControlName="m_relation" placeholder="Select Relation">
               <option value="" disabled>List Of Relations</option>
-              <option *ngFor="let relation of relations" [value]="relation">{{ relation }}</option>
+              <option *ngFor="let relation of relations" [value]="relation">
+                {{ relation }}
+              </option>
             </select>
-            <h5
+            <h5 class="err"
               *ngIf="
                 member.get('m_relation')?.touched &&
                 member.get('m_relation')?.invalid
@@ -465,16 +695,19 @@
               Relation is required
             </h5>
           </div>
-
+    
           <div class="grid-item-rate">
-            <label for="m_dob">Date Of Birth</label>
+            <label for="m_dob">
+              <span *ngIf="member.get('m_dob')?.invalid">*</span>
+              Date Of Birth
+            </label>
             <input
               id="m_dob"
               formControlName="m_dob"
               type="date"
               placeholder="DOB"
             />
-            <h5
+            <h5 class="err"
               *ngIf="
                 member.get('m_dob')?.touched && member.get('m_dob')?.invalid
               "
@@ -482,7 +715,7 @@
               DOB is required
             </h5>
           </div>
-
+    
           <button type="button" (click)="removeFamilyMember(i)">
             Remove Member
           </button>
@@ -492,7 +725,7 @@
         </button>
       </div>
     </div>
-
+    
     <!-- Form Submit and Cancel Buttons -->
 
     <div class="grid-container">

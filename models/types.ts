@@ -1,4 +1,5 @@
 export type Company = {
+  _id?:string
   code: string;
   name: string;
   address: string;
@@ -44,6 +45,7 @@ export type FamilyMember =  {
 }
 
 export type Registration = {
+  _id?:string,
   unique_id: number;
   user_name: string;
   dob: string;
@@ -88,12 +90,39 @@ export type Registration2 = {
 }
 
 export type Flats = {
+  _id?: string
   flat_no: number,
-  flat_fee: number
+  flat_name: string,
+  flat_price: number
 }
 
+export type Category = {
+  _id?: string
+  category_no: number,
+  category_name: string
+}
+export type Menu = {
+  id?:string,
+  parent_name:string,
+  menu_name:string,
+  controller_name: string,
+  action_name:string,
+  link_address:string
+}
+export type Relation = {
+  _id?: string
+  relation_id: number,
+  relation_name: string
+}
+
+export type Religion = {
+  _id?: string
+  religion_id: number,
+  religion_name: string
+}
 
 export type User = {
+  _id?:string,
   full_name:string,
   user_name: string,
   password:string,
@@ -105,13 +134,49 @@ export type User = {
   company:string
 }
 
-export type Menu = {
-  parent_name:string,
-  menu_name:string,
-  controller_name: string,
-  action_name:string,
-  link_address:string
+export type OrderItem = {
+  _id?: string; 
+  code: number;
+  name: string;
+  uom: string;
+  quantity: number;
+  rate: number;
+  amount: number;
 }
+
+export type Orders = {
+  _id?: string; 
+  order_id: number;
+  customer_code: string;
+  phone: string;
+  address?: string,
+  order_date?: Date; 
+  payment_mode: string;
+  order_total: number;
+  order_items: OrderItem[]; 
+}
+
+
+export type Customer = {
+  id?:string,
+  c_code:number,
+  c_name:string,
+  c_address:string,
+  c_phone: string
+}
+export type Product = {
+  id?:string,
+  p_code:number,
+  p_name:string,
+  uom:string
+}
+
+export type Uom = {
+  id?:string,
+  measurement_code:number,
+  measurement_name:string
+}
+
 
 export type RolePermissions = {
   controller_name:string,
@@ -125,4 +190,21 @@ export type RolePermissions = {
 export type Role = {
   role:string,
   rolePermissions: RolePermissions []
+}
+
+
+
+export type Student = {
+  _id?: string;
+  name:string,
+  roll_no:number,
+  branch: string,
+  year:string,
+  marks: Marks []
+}
+
+export type Marks = {
+  subject:string,
+  marks: number,
+  _id?: string;
 }

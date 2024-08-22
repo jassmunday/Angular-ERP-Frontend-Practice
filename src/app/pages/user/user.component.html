@@ -23,7 +23,7 @@
         <td>{{ user.company }}</td>
         <td>
           <button (click)="editUser(user)" class="btn btn-edit">Edit</button>
-          <button (click)="deleteUser(user.user_name)" class="btn btn-delete">Delete</button>
+          <button (click)="deleteUser(user._id || '')" class="btn btn-delete">Delete</button>
         </td>
       </tr>
     </tbody>
@@ -44,14 +44,17 @@
         <label for="password">Password</label>
         <input id="password" formControlName="password" type="password" placeholder="Password"/>
       </div>
+
       <div class="grid-item-rate">
         <label for="role">Role</label>
         <input id="role" formControlName="role" type="text" placeholder="Role"/>
       </div>
+
       <div class="grid-item-rate">
         <label for="email">Email</label>
         <input id="email" formControlName="email" type="email" placeholder="Email"/>
       </div>
+      
       <div class="grid-item-rate">
          <label for="email_password">Email Password</label>
         <input id="email_password" formControlName="email_password" type="password" placeholder="Email Password"/>
@@ -64,6 +67,7 @@
        <label for="photo">Photo Url</label>
         <input id="photo" formControlName="photo" type="text" placeholder="Photo URL"/>
       </div>
+
       <div class="grid-item-rate">
         <label for="company">Company</label>
         <select id="company" formControlName="company">

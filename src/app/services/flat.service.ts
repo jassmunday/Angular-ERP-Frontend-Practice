@@ -1,43 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Flats } from '../../../models/types';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FlatService {
-  private flats: Flats[] = [
-    {
-      flat_no: 1,
-      flat_fee: 10000
-    },
-    {
-      flat_no: 2,
-      flat_fee: 12000
-    }
-  ];
+  
+  private baseUrl = 'http://localhost:3000/api/flats';
+  private flats: Flats[] = [];
 
-  constructor() {}
-
-  // Retrieve the list of flats
-  getFlats(): Flats[] {
-    return this.flats;
+  http: HttpClient
+  constructor(http: HttpClient ) {
+    this.http = http;
   }
 
-  // Add a new flat to the list
-  addFlats(newFlat: Flats): void {
-    this.flats.push(newFlat);
+  getAllFlats(): Observable<Flats[]> {
+    return this.http.get<Flats[]>(`${this.baseUrl}`);
+  }
+  getFlatById(id: string): Observable<Flats>{
+    return this.http.get<Flats>(`${this.baseUrl}/${id}`)
+  }
+  addNewFlat(newFlat: Flats): Observable<Flats> {
+    return this.http.post<Flats>(`${this.baseUrl}`,newFlat);
+  }
+  deleteFlat(id:string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+  updateFlat(updatedFlat: Flats, id:string): Observable<Flats>{
+    return this.http.put<Flats>(`${this.baseUrl}/${id}`,updatedFlat);
   }
 
-  // Remove a flat by its number
-  deleteFlats(flatNo: number): void {
-    this.flats = this.flats.filter(flat => flat.flat_no !== flatNo);
-  }
-
-  // Update an existing flat's information
-  editFlats(updatedFlat: Flats): void {
-    const index = this.flats.findIndex(flat => flat.flat_no === updatedFlat.flat_no);
-    if (index !== -1) {
-      this.flats[index] = updatedFlat;
-    }
-  }
 }

@@ -6,6 +6,8 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Category } from '../../../../models/types';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-categories',
@@ -15,63 +17,42 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent {
-  categories: string[] = ['Shop', 'Resident'];
-
+  categoryForm: FormGroup;
+  categories: Category[] = [];
+  
   editingCategory: string | null = null; // Initially set to null
 
-  category = new FormControl('', [Validators.required]);
+  constructor(private categoryService: CategoryService) {
+    this.loadCategories();
+    this.categoryForm = new FormGroup({
+      category_no: new FormControl('', [Validators.required]),
+      category_name: new FormControl('', [Validators.required]),
+    });
+  }
+  
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.loadCategories();
+   }
 
-  categoryForm = new FormGroup({
-    category: this.category,
-  });
-
+  loadCategories() {
+    this.categoryService.getAllCategory().subscribe((data) => {
+      this.categories = data;
+    });
+  }
   addCategory() {
-    
-    const value: any = this.categoryForm.value.category;
-    if (!value) {
-      return; // Do nothing if the value is empty or only spaces
-    }
-    // If we are going to edit the category this will work
-    if (this.editingCategory) {
-      // find index of category that is passed to be edited
-      const index = this.categories.indexOf(this.editingCategory);
-      if(index !== -1){
-        // after finding the index of value that is passed for editing
-        // set its index value to the captured value from form 
-        this.categories[index] = value;
-        this.editingCategory = null;
-      }
-    } else {
-      // The else statement will work for adding new value
-    
-      this.categories.push(value);
-    }
-    this.categoryForm.reset();
+    const newCategory = this.categoryForm.value;
+    this.categoryService.addNewCategory(newCategory).subscribe(() => {
+      this.loadCategories();
+    })   
   }
 
-  deleteCategory(category: string) {
-    // Filtering the categories array to not contain the value passed as
-    // argument to delete
-    this.categories = this.categories.filter((value) => value !== category);
-    if (this.editingCategory === category) {
-      this.editingCategory = null;
+  deleteCategory(id: string) {
+    this.categoryService.deleteCategory(id).subscribe(() => {
+      this.loadCategories();
       this.categoryForm.reset();
-    }
-
+    })
+   
   }
-
-  editCategory(category: string) {
-    // To Create the Referance to the Particular category that we want to edit
-    this.editingCategory = category;
-    // by this code the now the category input will contain the current value of 
-    // category that we are going to edit
-    this.category.setValue(category);
-  }
-
-  cancelEdit(){
-    this.editingCategory = null;
-    this.categoryForm.reset();
-  }
-
-
 }

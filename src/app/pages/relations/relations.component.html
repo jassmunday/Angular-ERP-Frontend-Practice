@@ -1,35 +1,51 @@
-<div class="categories-container">
+<div class="flat-management">
   <h2>Manage Relations</h2>
-  
-  <form [formGroup]="relationForm" (ngSubmit)="addRelation()">
-    <div class="form-inline">
-      <div class="form-group">
-        <label for="relation">Relation </label>
-        <input class="input-class" id="relation" formControlName="relationValue" placeholder="Enter new relation" />
-        <div *ngIf="relationForm.get('relationValue')?.invalid && relationForm.get('relationValue')?.touched">
-          Relation is required.
+
+  <!-- Form to add or update a relation -->
+  <form [formGroup]="relationForm" (ngSubmit)="addRelation()" class="flat-form">
+    <div class="grid-container">
+      <div class="grid-item">
+        <label for="relation_id">Relation ID:</label>
+        <input
+          id="relation_id"
+          type="text"
+          formControlName="relation_id"
+          placeholder="Enter relation ID"
+          [class.is-invalid]="relationForm.get('relation_id')?.invalid && relationForm.get('relation_id')?.touched"
+        />
+        <div *ngIf="relationForm.get('relation_id')?.invalid && relationForm.get('relation_id')?.touched" class="invalid-feedback">
+          Relation ID is required.
         </div>
       </div>
-
-      <button type="submit" [disabled]="relationForm.invalid">Add Relation</button>
+      <div class="grid-item">
+        <label for="relation_name">Relation Name:</label>
+        <input
+          id="relation_name"
+          type="text"
+          formControlName="relation_name"
+          placeholder="Enter relation name"
+          [class.is-invalid]="relationForm.get('relation_name')?.invalid && relationForm.get('relation_name')?.touched"
+        />
+        <div *ngIf="relationForm.get('relation_name')?.invalid && relationForm.get('relation_name')?.touched" class="invalid-feedback">
+          Relation name is required.
+        </div>
+      </div>
     </div>
+    <button type="submit" class="submit-button" [disabled]="relationForm.invalid">
+      {{ editingRelation ? 'Update Relation' : 'Add Relation' }}
+    </button>
   </form>
 
-  <h3>Existing Relations</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Relation</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let relation of relations">
-        <td>{{ relation }}</td>
-        <td>
-          <button (click)="deleteRelation(relation)" class="delete-button">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- List of existing relations -->
+  <h3>Relation List</h3>
+  <ul class="flat-list">
+    <li *ngFor="let relation of relations">
+      <span class="flat-info">
+        Relation ID: {{ relation.relation_id }}, Name: {{ relation.relation_name }}
+      </span>
+      <button (click)="deleteRelation(relation._id || '')" class="delete-button">
+        Delete
+      </button>
+    </li>
+  </ul>
 </div>

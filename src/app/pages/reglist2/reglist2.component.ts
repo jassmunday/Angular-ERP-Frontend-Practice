@@ -1,18 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Regsitration2Service } from '../../services/regsitration2.service';
+//import { Registration2Service } from '../../services/registration2.service';
+
 import { Registration2 } from '../../../../models/types';
 import { CommonModule } from '@angular/common';
+import { Regsitration2Service } from '../../services/regsitration2.service';
+import { HttpClient } from '@angular/common/http';
 
-Regsitration2Service
 @Component({
   selector: 'app-reglist2',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './reglist2.component.html',
-  styleUrl: './reglist2.component.css'
+  styleUrls: ['./reglist2.component.css']
 })
-export class Reglist2Component {
+export class Reglist2Component implements OnInit {
   registrations: Registration2[] = [];
 
   constructor(
@@ -25,7 +27,9 @@ export class Reglist2Component {
   }
 
   loadRegistrations() {
-    this.registrations = this.registrationService.getRegistrations();
+    this.registrationService.getRegistrations().subscribe(registrations => {
+      this.registrations = registrations;
+    });
   }
 
   editRegistration(id: number) {
@@ -34,8 +38,9 @@ export class Reglist2Component {
 
   deleteRegistration(id: number) {
     if (confirm('Are you sure you want to delete this registration?')) {
-      this.registrationService.deleteRegistration(id);
-      this.loadRegistrations(); // Refresh the list
+      this.registrationService.deleteRegistration(id).subscribe(() => {
+        this.loadRegistrations(); // Refresh the list after deletion
+      });
     }
   }
 

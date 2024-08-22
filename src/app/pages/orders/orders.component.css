@@ -1,0 +1,197 @@
+/* Container Styling */
+.order-form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-array-container{
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
+.form-array-heading{
+  background-color: dodgerblue;
+  height: 35px;
+  color:#fff;
+  padding: 5px;
+  margin-bottom: 10px;
+  display:flex;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: space-between;
+}
+/* Form Styling */
+.form-group {
+  width: 400px;
+  display:flex;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  min-width:125px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  border: 1px solid #ccc;
+  height: 30px;
+  background-color: aliceblue;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.form-group input[readonly] {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+}
+
+/* Order Items Styling */
+.order-items {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  max-height: 320px;
+  overflow: scroll;
+}
+
+.order-items table {
+ 
+  width: 100%;
+  border-collapse: collapse;
+ 
+}
+
+.order-items thead {
+  position: static;
+}
+
+.order-items th,
+.order-items td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.order-items th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.order-items td input,
+.order-items td select {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.order-items td button {
+  padding: 5px 10px;
+  background-color: #ff6666;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.order-items td button:hover {
+  background-color: #ff3333;
+}
+
+/* Button Styling */
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"] {
+  background-color: #28a745;
+  color: #fff;
+}
+
+button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+button[type="button"] {
+  background-color: #6c757d;
+  color: #fff;
+  margin-right: 10px;
+}
+
+button[type="button"]:hover {
+  background-color: #5a6268;
+}
+
+button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+/* Orders List */
+.orders-list {
+  margin-top: 40px;
+}
+
+.orders-list h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.orders-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.orders-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.orders-list span {
+  font-size: 18px;
+  color: #333;
+}
+
+.orders-list button {
+  margin-left: 10px;
+}
+
+.orders-list button:first-child {
+  background-color: #007bff;
+}
+
+.orders-list button:first-child:hover {
+  background-color: #0069d9;
+}
+
+.orders-list button:last-child {
+  background-color: #dc3545;
+}
+
+.orders-list button:last-child:hover {
+  background-color: #c82333;
+}
