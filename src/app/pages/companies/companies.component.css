@@ -1,6 +1,7 @@
 .company-list-container {
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 1000px;
+  margin-left: 350px;
+  /* margin: 0 auto; */
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;

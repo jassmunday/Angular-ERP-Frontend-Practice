@@ -1,0 +1,43 @@
+<div class="product-list-container">
+    <h2>Products</h2>
+<!-- 
+    <button class="btn btn-primary" (click)="addProduct()">Add New Product</button> -->
+    
+    <input
+    type="text"
+    class="form-control search"
+
+    placeholder="Search Products"
+    [(ngModel)]="searchTerm"
+    (ngModelChange)="onSearchChange()"
+    />
+    <button class="btn btn-primary" (click)="closeModal()" >Close</button>
+
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Product Code</th>
+          <th>Product Name</th>
+          <th>UOM</th>
+          <!-- <th>Actions</th> -->
+          <th>Select</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of filteredProducts; let i = index" >
+          <td>{{ product.p_code }}</td>
+          <td>{{ product.p_name }}</td>
+          <td>{{ product.uom }}</td>
+          <!-- <td>
+            <button class="btn btn-warning" (click)="editProduct(product._id)">Edit</button>
+            <button class="btn btn-danger" (click)="deleteProduct(product._id)">Delete</button>
+          </td> -->
+          <td> 
+            <button class="btn btn-info" (click)="selectProduct(product)">Select</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -1,10 +1,16 @@
-<div class="container">
+<div  *ngIf="isAuthenticated" class="container">
   <div class="topbar">
     <div class="inner">
-      <button class="menu-button" (click)="onToggle()">☰</button>
-      <h1>Company Name</h1>
+      <button  *ngIf="isAuthenticated" class="menu-button" (click)="onToggle()">☰</button>
+      <h1>COMPANY ERP</h1>
     </div>
-    <!-- Menu button -->
-    {{ pageTitle }}
+    <!-- Display the page title -->
+    
+
+    <!-- Show Logout button if authenticated -->
+    <button class="btn-new btn-danger" *ngIf="isAuthenticated" (click)="logout()">Logout</button>
+
+    <!-- Show Login button if not authenticated -->
+    <button class="btn-new btn-success"  *ngIf="!isAuthenticated" (click)="login()">Login</button>
   </div>
 </div>

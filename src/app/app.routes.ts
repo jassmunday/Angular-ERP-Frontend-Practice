@@ -9,58 +9,59 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { FlatComponent } from './pages/flat/flat.component';
 import { RegistrationListComponent } from './pages/registration-list/registration-list.component';
 import { ReligionComponent } from './pages/religion/religion.component';
-import { UserComponent } from './pages/user/user.component';
+//import { UserComponent } from './pages/user/user.component';
+
 import { NotfoundComponent } from './pages/notfound/notfound.component';
 import { Registration2Component } from './pages/registration2/registration2.component';
 import { Reglist2Component } from './pages/reglist2/reglist2.component';
-//import { MenusComponent } from './pages/menus/menus.component';
-
-//import { MenuListComponent } from './pages/menu-list/menu-list.component';
 import { RolePermissionsComponent } from './pages/role-permissions/role-permissions.component';
 import { DetailFormComponent } from './pages/detail-form/detail-form.component';
 import { StudentListComponent } from './pages/student-list/student-list.component';
 import { OrderListComponent } from './pages/order-list/order-list.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { ProductsComponent } from './pages/products/products.component';
+import { ProductListComponent } from './pages/product-list/product-list.component';
+import { authGuard } from './services/auth.guard'; // Import your Auth Guard
+import { UserComponent } from './pages/user/user.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 
 export const routes: Routes = [
-  { path: 'masters/companies', component: CompaniesComponent },
-  { path: 'masters/categories', component: CategoriesComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'masters/relations', component: RelationsComponent },
-  { path: 'masters/religions', component: ReligionComponent},
-  { path: '', component: WelcomeComponent },
-  { path: 'welcome', component: WelcomeComponent },
+  { path: 'login', component: LoginComponent }, // No guard on login
+  
+  // Protected Routes
+  { path: 'welcome', component: WelcomeComponent, canActivate: [authGuard] },
+  { path: 'masters/companies', component: CompaniesComponent, canActivate: [authGuard] },
+  { path: 'masters/categories', component: CategoriesComponent, canActivate: [authGuard] },
+  { path: 'masters/relations', component: RelationsComponent, canActivate: [authGuard] },
+  { path: 'masters/religions', component: ReligionComponent, canActivate: [authGuard] },
+  { path: 'company-list', component: CompaniesComponent, canActivate: [authGuard] },
+  { path: 'add-company', component: AddcompanyComponent, canActivate: [authGuard] },
+  { path: 'edit-company/:_id', component: AddcompanyComponent, canActivate: [authGuard] },
+  { path: 'registrations', component: RegistrationComponent, canActivate: [authGuard] },
+  { path: 'registrations-add', component: Registration2Component, canActivate: [authGuard] },
+  { path: 'registrations-add/:id', component: Registration2Component, canActivate: [authGuard] },
+  { path: 'registrations-list-new', component: Reglist2Component, canActivate: [authGuard] },
+  { path: 'registrations-list', component: RegistrationListComponent, canActivate: [authGuard] },
+  { path: 'masters/flats', component: FlatComponent, canActivate: [authGuard] },
+  { path: 'security/roles', component: RolePermissionsComponent, canActivate: [authGuard] },
+  { path: 'detail-form', component: DetailFormComponent, canActivate: [authGuard] },
+  { path: 'detail-form/:_id', component: DetailFormComponent, canActivate: [authGuard] },
+  { path: 'student-list', component: StudentListComponent, canActivate: [authGuard] },
+  { path: 'order-form', component: OrdersComponent, canActivate: [authGuard] },
+  { path: 'order-form/:_id', component: OrdersComponent, canActivate: [authGuard] },
+  { path: 'order-list', component: OrderListComponent, canActivate: [authGuard] },
+  { path: 'products-manage', component: ProductsComponent, canActivate: [authGuard] },
+  { path: 'products-manage/:id', component: ProductsComponent, canActivate: [authGuard] },
+  { path: 'products', component: ProductListComponent, canActivate: [authGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
+  
+  // Catch-all route, redirect to 404 if route doesn't exist
   { path: 'not-found', component: NotfoundComponent },
-  { path: 'masters/users', component: UserComponent },
-  { path: 'company-list', component: CompaniesComponent }, // Duplicated
-
-  { path: 'add-company', component: AddcompanyComponent }, // Route for adding a new company
-  { path: 'edit-company/:_id', component: AddcompanyComponent }, // Route for editing a company
-  { path: 'registrations', component: RegistrationComponent },
-
-  { path: 'registrations-add', component: Registration2Component},
-  { path: 'registrations-add/:id', component: Registration2Component},
-  { path: 'registrations-list-new', component: Reglist2Component},
-
-  { path: 'registrations/:_id', component: RegistrationComponent },
-  { path: 'registrations-list', component: RegistrationListComponent },
   
-  { path: 'masters/flats', component: FlatComponent },
- // { path: 'security/menu-list', component: MenuListComponent },
-  //{ path: 'add-menu', component: MenusComponent },
-  //{ path: 'edit-menu/:menu_name', component: MenusComponent },
-  { path: 'security/roles', component: RolePermissionsComponent},
+  // Redirect to login if no route matches
+  { path: '', redirectTo: '/welcome', pathMatch: 'full' },
 
-  { path: 'detail-form', component: DetailFormComponent },
-  { path: 'detail-form/:_id', component: DetailFormComponent },
-  { path: 'student-list', component: StudentListComponent },
-
-
-  { path: 'order-form', component: OrdersComponent},
-  { path: 'order-form/:_id', component: OrdersComponent },
-  { path: 'order-list', component: OrderListComponent },
-
+  // Fallback route for undefined routes
   { path: '**', redirectTo: '/not-found' }
-  
 ];

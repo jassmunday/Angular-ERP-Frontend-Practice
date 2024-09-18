@@ -1,0 +1,71 @@
+<div class="dashboard">
+  <!-- First section: Cards -->
+  <div class="dashboard-cards">
+    <div class="card">
+      <h3>Total Orders</h3>
+      <p>{{ orders.length }}</p>
+    </div>
+    <div class="card">
+      <h3>Total Products</h3>
+      <p>{{ products.length }}</p>
+    </div>
+    <div class="card">
+      <h3>Total Revenue</h3>
+      <p>{{ calculateTotalRevenue() }}</p>
+    </div>
+    <div class="card">
+      <h3>Total Customers</h3>
+      <p>{{ customer.length }}</p>
+    </div>
+  </div>
+
+  <!-- Second section: Tables -->
+  <div class="dashboard-lists">
+    <div class="list-section">
+      <h3>Products</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Product Code</th>
+            <th>Product Name</th>
+            <th>Unit of Measurement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>{{ product.p_code }}</td>
+            <td>{{ product.p_name }}</td>
+            <td>{{ product.uom }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="list-section">
+      <h3>Orders</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Order Date</th>
+            <th>Order Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let o of orders">
+            <td>{{ o.order_date | date : "longDate" }}</td>
+            <td>{{ o.order_total }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="dashboard-graphs">
+  
+    <h3>Weekly Revenue</h3>
+    <canvas id="revenueChart"></canvas>
+
+    <h3>Weekly Orders</h3>
+    <canvas id="ordersChart"></canvas>
+  </div>
+</div>

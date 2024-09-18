@@ -1,8 +1,8 @@
 /* Ensure the container takes the full viewport height */
 .container-all {
   display: flex;
-  height: 100vh;
-  overflow: hidden; /* Prevent scrollbars on the container */
+  height: 100px;
+  /* overflow: hidden; /* Prevent scrollbars on the container */
 }
 
 .container {
@@ -43,6 +43,14 @@
   box-sizing: border-box;
   transition: margin-left 0.3s ease; /* Smooth transition for content */
   flex: 1;
+}
+
+.container-new{
+  width: 100%;
+  height:auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .content.without-sidebar {

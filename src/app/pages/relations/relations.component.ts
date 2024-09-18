@@ -3,6 +3,9 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { RelationService } from '../../services/relation.service';
 import { CommonModule } from '@angular/common';
 import { Relation } from '../../../../models/types';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductListComponent } from '../product-list/product-list.component';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-relations',
@@ -17,7 +20,7 @@ export class RelationsComponent {
   
   editingRelation: string | null = null; // Initially set to null
 
-  constructor(private relationService: RelationService) {
+  constructor(private relationService: RelationService, public dialogRef: MatDialog) {
     this.loadRelations();
     this.relationForm = new FormGroup({
       relation_id: new FormControl('', [Validators.required]),
@@ -47,5 +50,9 @@ export class RelationsComponent {
       this.relationForm.reset();
     })
    
+  }
+
+  openModal(){
+    this.dialogRef.open(ModalComponent);
   }
 }

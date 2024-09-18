@@ -1,0 +1,9 @@
+.container{
+    position: relative;
+    padding-top: 25%;
+    padding-left: 25%;
+    height: 100px;
+    width:200px;
+    z-index: 1000;
+    background-color: red;
+}

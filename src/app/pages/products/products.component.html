@@ -1,0 +1,74 @@
+<div class="container">
+    <h2>{{ isEditMode ? 'Edit Product' : 'Add New Product' }}</h2>
+    
+    <!-- Product Form -->
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="p_code">Product Code</label>
+        <input type="text" id="p_code" class="form-control" formControlName="p_code" />
+        <h5 *ngIf="productForm.get('p_code')?.invalid && productForm.get('p_code')?.touched">Product code is required</h5>
+      </div>
+  
+      <div class="form-group">
+        <label for="p_name">Product Name</label>
+        <input type="text" id="p_name" class="form-control" formControlName="p_name" />
+        <h5 *ngIf="productForm.get('p_name')?.invalid && productForm.get('p_name')?.touched">Product name is required</h5>
+      </div>
+  
+      <div class="form-group">
+        <label for="uom">Unit of Measurement (UOM)</label>
+        <input type="text" id="uom" class="form-control" formControlName="uom" />
+        <h5 *ngIf="productForm.get('uom')?.invalid && productForm.get('uom')?.touched">UOM is required</h5>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">
+        {{ isEditMode ? 'Update Product' : 'Add Product' }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="productForm.reset()">Clear Form</button>
+    </form>
+    <hr>
+    <div class="product-list-container">
+      <h2>Products</h2>
+      <!-- <input
+      type="text"
+      class="form-control search"
+  
+      placeholder="Search Products"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onSearchChange()"
+      />
+      <button class="btn btn-primary" (click)="closeModal()" >Close</button> -->
+  
+  
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Product Code</th>
+            <th>Product Name</th>
+            <th>UOM</th>
+            <!-- <th>Actions</th> -->
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products; let i = index" >
+            <td>{{ product.p_code }}</td>
+            <td>{{ product.p_name }}</td>
+            <td>{{ product.uom }}</td>
+            <td>
+              <button class="btn btn-warning" (click)="editProduct(product._id || '')">Edit</button>
+              <button class="btn btn-danger" (click)="deleteProduct(product._id || '')">Delete</button>
+            </td>
+            <!-- <td> 
+              <button class="btn btn-info" (click)="selectProduct(product)">Select</button>
+            </td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+
+
+
+  </div>
+  

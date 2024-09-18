@@ -165,7 +165,7 @@ export type Customer = {
   c_phone: string
 }
 export type Product = {
-  id?:string,
+  _id?:string,
   p_code:number,
   p_name:string,
   uom:string
@@ -176,7 +176,10 @@ export type Uom = {
   measurement_code:number,
   measurement_name:string
 }
-
+export type AuthUser = {
+  username?:string,
+  password?:string 
+}
 
 export type RolePermissions = {
   controller_name:string,

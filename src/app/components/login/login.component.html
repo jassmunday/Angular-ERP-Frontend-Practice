@@ -1,48 +1,51 @@
-<div class="outer">
-    <h2>Company Name</h2>
+<div class="container">
+  <div class="outer">
+    <h2>COMPANY ERP</h2>
 
-  <div class="login-container">
-    <form [formGroup]="loginform">
-      <h4>Login to Your Account</h4>
-      <h5>Enter your username & password to login</h5>
+    <div class="login-container">
+      <form [formGroup]="loginForm">
+        <h4>Login to Your Account</h4>
+        <h5>Enter your username & password to login</h5>
+        
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            placeholder="Username"
+            formControlName="username"
+          />
+          <h5
+            style="color: red"
+            [hidden]="
+              loginForm.get('username')?.valid ||
+              loginForm.get('username')?.untouched
+            "
+          >
+            Enter Correct Username
+          </h5>
+        </div>
 
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          placeholder="Username"
-          formControlName="username"
-        />
-        <h5
-          [hidden]="
-            loginform.get('username')?.valid ||
-            loginform.get('username')?.untouched
-          "
-        >
-          Enter Correct Email
-        </h5>
-      </div>
-
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          placeholder="Password"
-          formControlName="password"
-        />
-        <h5
-          [hidden]="
-            loginform.get('password')?.valid ||
-            loginform.get('password')?.untouched
-          "
-        >
-          Invalid Password or Password > 6
-        </h5>
-      </div>
-
-      <button type="submit" (click)="login()">Login</button>
-    </form>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            formControlName="password"
+          />
+          <h5
+            style="color: red"
+            [hidden]="
+              loginForm.get('password')?.valid ||
+              loginForm.get('password')?.untouched
+            "
+          >
+            Invalid Password or Password > 6
+          </h5>
+        </div>
+        <button type="submit" (click)="login()">Login</button>
+      </form>
+    </div>
   </div>
 </div>

@@ -4,7 +4,8 @@ form {
   flex-direction: column;
   gap: 20px;
   max-width: 1200px;
-  margin: auto;
+  margin-left: 300px;
+  /* margin: auto; */
   padding: 20px;
 }
 

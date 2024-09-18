@@ -13,6 +13,11 @@ import { CustomersService } from '../../services/customers.service';
 import { UomService } from '../../services/uom.service';
 import { ActivatedRoute, Router } from '@angular/router';
 // import { Customer } from '../../../../models/types';
+
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ProductListComponent } from '../product-list/product-list.component';
+import { ModalComponent } from '../modal/modal.component';
+
 import {
   Orders,
   Product,
@@ -45,6 +50,8 @@ export class OrdersComponent {
   isEditForm: boolean = false;
   editingOrderId = '';
 
+  selectedProduct: Product | null = null;
+
   products: Product[] = [];
   product: Product | null = null;
   productName = '';
@@ -60,6 +67,7 @@ export class OrdersComponent {
     public measurementService: UomService,
     public productService: ProductsService,
     public routes: ActivatedRoute,
+    public dialogRef: MatDialog,
     public router: Router
   ) {
     this.orderForm = new FormGroup({
@@ -199,6 +207,29 @@ export class OrdersComponent {
       console.log('Invalid Order Data');
     }
   }
+  
+  openProductModal(index: number) {
+    const dialogRef = this.dialogRef.open(ProductListComponent);
+    
+    dialogRef.componentInstance.productSelected.subscribe(
+      (product: Product) => {
+        this.selectedProduct = product; // Capture the selected product
+        console.log(this.selectedProduct);
+        if (this.selectedProduct) {
+          const orderItem = this.order_items.at(index);
+          orderItem.patchValue({
+            code: this.selectedProduct.p_code,
+            name: this.selectedProduct.p_name,
+            uom: this.selectedProduct.uom,
+          });
+          this.calculateAmount(index); // Recalculate amount based on selected product
+        }
+
+        //this.fillProductDetails(product); // Fill details into the form array
+      }
+    );
+  }
+
   calculateOrderTotal(): void {
     this.orderForm.get('order_total')?.setValue(0);
 
@@ -208,16 +239,15 @@ export class OrdersComponent {
     });
     this.orderForm.get('order_total')?.setValue(total);
   }
-   
+
   onCustomerChange(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
-    const code = parseInt(selectElement.value); 
+    const code = parseInt(selectElement.value);
     this.customerService.getCustomerByCode(code).subscribe((value) => {
       this.cstmr = value;
       console.log(this.cstmr);
       this.orderForm.get('phone')?.setValue(this.cstmr?.c_phone || '');
       this.orderForm.get('address')?.setValue(this.cstmr?.c_address || '');
-      
     });
     let date = new Date();
     console.log(date);

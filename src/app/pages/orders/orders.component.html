@@ -98,7 +98,7 @@
               *ngFor="let item of order_items.controls; let i = index"
               [formGroupName]="i"
             >
-              <td>
+              <td class="find">
                 <select
                   id="code_{{i}}"
                   formControlName="code"
@@ -108,9 +108,11 @@
                     *ngFor="let product of products"
                     [value]="product.p_code"
                   >
-                    {{ product.p_code }}
+                    {{ product.p_code  }} - {{product.p_name }}
                   </option>
                 </select>
+                <!-- <input id="code_{{i}}" type="number" formControlName="code" readonly />
+                <button (click)=" openProductModal(i)">Find</button> -->
               </td>
               <td>
                 <input id="name_{{i}}" type="text" formControlName="name" readonly />

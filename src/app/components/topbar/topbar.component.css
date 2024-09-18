@@ -31,3 +31,19 @@
 .menu-button:hover {
   color: #aaa;
 }
+
+.btn-new{
+  background-color: grey;
+  padding: 7px 10px;
+  color: white;
+  font-weight: bolder;
+  border-radius: 5px;
+}
+
+.btn-danger{
+  background-color: dodgerblue;
+}
+
+.btn-success{
+  background-color: darkblue;
+}
